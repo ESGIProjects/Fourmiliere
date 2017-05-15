@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Fourmiliere
+namespace AntBox
 {
     /// <summary>
     /// Logique d'interaction pour MainWindow.xaml
@@ -23,6 +23,11 @@ namespace Fourmiliere
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
