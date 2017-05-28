@@ -20,12 +20,33 @@ namespace AntBox
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        Button run = new Button();
+        Button save = new Button();
+        Button load = new Button();
+
         public MainWindow()
         {
             InitializeComponent();
+            Board.Background = new SolidColorBrush(Colors.AliceBlue);
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void runClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void saveClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void loadClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void aboutClick(object sender, RoutedEventArgs e)
         {
 
         }

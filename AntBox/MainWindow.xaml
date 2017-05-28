@@ -11,7 +11,7 @@
     <Grid ShowGridLines="True">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="5*" />
+            <ColumnDefinition Width="4*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -22,28 +22,39 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Button Content="Run"
             Width="Auto"
             Height="Auto"
             Grid.Column="0"
-            Click="Button_Click"
+            Click="runClick"
             />
             <Button Content="Save"
             Width="Auto"
             Height="Auto"
             Grid.Column="1"
-            Click="Button_Click"
+            Click="saveClick"
             />
             <Button Content="Load"
             Width="Auto"
             Height="Auto"
             Grid.Column="2"
-            Click="Button_Click"
+            Click="loadClick"
+            />
+            <Button Content="About"
+            Width="Auto"
+            Height="Auto"
+            Grid.Column="3"
+            Click="aboutClick"
             />
         </Grid>
-        <Grid Grid.Row="1" Grid.Column="1" ShowGridLines="True">
+        <Grid Name="Board" Grid.Row="1" Grid.Column="1" ShowGridLines="True">
             <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
