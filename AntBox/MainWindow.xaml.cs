@@ -43,7 +43,19 @@ namespace AntBox
 
         private void loadClick(object sender, RoutedEventArgs e)
         {
+            Microsoft.Win32.OpenFileDialog ofd = new Microsoft.Win32.OpenFileDialog();
+            ofd.DefaultExt = ".xml";
+            ofd.Filter = " XML Files (.xml)|*.xml";
 
+            
+            Nullable<bool> result = ofd.ShowDialog();
+
+           
+            if (result == true)
+            {
+                string filename = ofd.FileName;
+                Console.Write(filename);
+            }
         }
 
         private void aboutClick(object sender, RoutedEventArgs e)
