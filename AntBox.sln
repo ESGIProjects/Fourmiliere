@@ -1,9 +1,20 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26228.9
+VisualStudioVersion = 15.0.26403.7
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AntBox", "AntBox\AntBox.csproj", "{19FE6CAE-6264-4DC2-9BFB-DCCF40529FE1}"
+	ProjectSection(ProjectDependencies) = postProject
+		{30D8A1C9-681E-42EF-8149-AE96A5A4FDB2} = {30D8A1C9-681E-42EF-8149-AE96A5A4FDB2}
+		{5A2166F9-D007-42BE-9052-F0C30C58948D} = {5A2166F9-D007-42BE-9052-F0C30C58948D}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibMetier", "LibMetier\LibMetier.csproj", "{30D8A1C9-681E-42EF-8149-AE96A5A4FDB2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{5A2166F9-D007-42BE-9052-F0C30C58948D} = {5A2166F9-D007-42BE-9052-F0C30C58948D}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibAbstraite", "LibAbstraite\LibAbstraite.csproj", "{5A2166F9-D007-42BE-9052-F0C30C58948D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +26,14 @@ Global
 		{19FE6CAE-6264-4DC2-9BFB-DCCF40529FE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19FE6CAE-6264-4DC2-9BFB-DCCF40529FE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{19FE6CAE-6264-4DC2-9BFB-DCCF40529FE1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30D8A1C9-681E-42EF-8149-AE96A5A4FDB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30D8A1C9-681E-42EF-8149-AE96A5A4FDB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30D8A1C9-681E-42EF-8149-AE96A5A4FDB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30D8A1C9-681E-42EF-8149-AE96A5A4FDB2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A2166F9-D007-42BE-9052-F0C30C58948D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A2166F9-D007-42BE-9052-F0C30C58948D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A2166F9-D007-42BE-9052-F0C30C58948D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A2166F9-D007-42BE-9052-F0C30C58948D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

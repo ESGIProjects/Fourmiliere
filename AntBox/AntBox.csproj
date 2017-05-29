@@ -100,5 +100,15 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LibAbstraite\LibAbstraite.csproj">
+      <Project>{5a2166f9-d007-42be-9052-f0c30c58948d}</Project>
+      <Name>LibAbstraite</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LibMetier\LibMetier.csproj">
+      <Project>{30d8a1c9-681e-42ef-8149-ae96a5a4fdb2}</Project>
+      <Name>LibMetier</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
