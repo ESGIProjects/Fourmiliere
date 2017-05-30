@@ -1,7 +1,15 @@
-C:\Users\fabien.griselles\Documents\Visual Studio 2017\Projects\Fourmiliere\LibMetier\bin\Debug\LibMetier.dll
-C:\Users\fabien.griselles\Documents\Visual Studio 2017\Projects\Fourmiliere\LibMetier\bin\Debug\LibMetier.pdb
-C:\Users\fabien.griselles\Documents\Visual Studio 2017\Projects\Fourmiliere\LibMetier\bin\Debug\LibAbstraite.dll
-C:\Users\fabien.griselles\Documents\Visual Studio 2017\Projects\Fourmiliere\LibMetier\bin\Debug\LibAbstraite.pdb
-C:\Users\fabien.griselles\Documents\Visual Studio 2017\Projects\Fourmiliere\LibMetier\obj\Debug\LibMetier.csprojResolveAssemblyReference.cache
-C:\Users\fabien.griselles\Documents\Visual Studio 2017\Projects\Fourmiliere\LibMetier\obj\Debug\LibMetier.dll
-C:\Users\fabien.griselles\Documents\Visual Studio 2017\Projects\Fourmiliere\LibMetier\obj\Debug\LibMetier.pdb
+C:/Users/fabien.griselles/Documents/Visual Studio 2017/Projects/Fourmiliere/LibMetier/bin/Debug/LibMetier.dll
+C:/Users/fabien.griselles/Documents/Visual Studio 2017/Projects/Fourmiliere/LibMetier/bin/Debug/LibMetier.pdb
+C:/Users/fabien.griselles/Documents/Visual Studio 2017/Projects/Fourmiliere/LibMetier/bin/Debug/LibAbstraite.dll
+C:/Users/fabien.griselles/Documents/Visual Studio 2017/Projects/Fourmiliere/LibMetier/bin/Debug/LibAbstraite.pdb
+C:/Users/fabien.griselles/Documents/Visual Studio 2017/Projects/Fourmiliere/LibMetier/obj/Debug/LibMetier.csprojResolveAssemblyReference.cache
+C:/Users/fabien.griselles/Documents/Visual Studio 2017/Projects/Fourmiliere/LibMetier/obj/Debug/LibMetier.dll
+C:/Users/fabien.griselles/Documents/Visual Studio 2017/Projects/Fourmiliere/LibMetier/obj/Debug/LibMetier.pdb
+/Users/fabibi/Visual Sudio/Fourmiliere/LibMetier/bin/Debug/LibMetier.dll
+/Users/fabibi/Visual Sudio/Fourmiliere/LibMetier/bin/Debug/LibMetier.pdb
+/Users/fabibi/Visual Sudio/Fourmiliere/LibMetier/bin/Debug/LibAbstraite.dll
+/Users/fabibi/Visual Sudio/Fourmiliere/LibMetier/bin/Debug/LibAbstraite.pdb
+/Users/fabibi/Visual Sudio/Fourmiliere/LibMetier/obj/Debug/LibMetier.csprojResolveAssemblyReference.cache
+/Users/fabibi/Visual Sudio/Fourmiliere/LibMetier/obj/Debug/LibMetier.csproj.CoreCompileInputs.cache
+/Users/fabibi/Visual Sudio/Fourmiliere/LibMetier/obj/Debug/LibMetier.dll
+/Users/fabibi/Visual Sudio/Fourmiliere/LibMetier/obj/Debug/LibMetier.pdb
