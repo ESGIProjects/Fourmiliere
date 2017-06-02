@@ -50,7 +50,7 @@ namespace AntBox
             }
         }
 
-        private void aboutClick(object sender, RoutedEventArgs e)
+        private void genererClick(object sender, RoutedEventArgs e)
         {
 
         }
