@@ -17,6 +17,9 @@ namespace AntBox
 			throw new NotImplementedException();
 		}
 
+
+
+        //génère des Fourmi à partir d'une fabrique concrète
 		public override ObjetAbstrait CreerObjet(string nom)
 		{
 			throw new NotImplementedException();

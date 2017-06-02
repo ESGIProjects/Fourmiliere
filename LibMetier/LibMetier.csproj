@@ -44,6 +44,8 @@
     <Compile Include="Agents\Reine.cs" />
     <Compile Include="Environnement\Acces.cs" />
     <Compile Include="Environnement\BoutDeTerrain.cs" />
+    <Compile Include="Fabrique\ClientFabriqueFourmiliere.cs" />
+    <Compile Include="Fabrique\FabriqueFourmi.cs" />
     <Compile Include="Fabrique\FabriqueFourmiliere.cs" />
     <Compile Include="Objets\Nourriture.cs" />
     <Compile Include="Objets\Oeuf.cs" />

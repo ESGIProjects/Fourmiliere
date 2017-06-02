@@ -26,7 +26,7 @@ namespace AntBox
 
 		public override string ToString()
 		{
-			return "Je suis une fourmi parmis tant d'autre";
+			return "Je suis "+Nom+" la fourmi (PV : "+PointDeVie+")";
 		}
 
 	}

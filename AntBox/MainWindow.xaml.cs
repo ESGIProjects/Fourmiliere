@@ -60,8 +60,9 @@ namespace AntBox
             }
 
             //A partir d'ici on génèrera l'environnement
-
-
+            FabriquePersonnage maFabriqueDeFourmi = new FabriqueFourmi();
+            PersonnageAbstrait Bella = maFabriqueDeFourmi.CreerPersonnage(FabriqueFourmi.Reine);
+            Console.WriteLine(Bella);
         }
     }
 }
