@@ -18,7 +18,7 @@ namespace AntBox
         public MainWindow()
         {
             InitializeComponent();
-            Board.Background = new SolidColorBrush(Colors.AliceBlue);
+            Grille.Background = new SolidColorBrush(Colors.AliceBlue);
         }
 
         private void runClick(object sender, RoutedEventArgs e)
@@ -52,6 +52,15 @@ namespace AntBox
 
         private void genererClick(object sender, RoutedEventArgs e)
         {
+            Console.WriteLine("Génération de la fourmilière");
+
+            for (int i = 0; i < 20; i++) {
+                Grille.ColumnDefinitions.Add(new ColumnDefinition() {  });
+                Grille.RowDefinitions.Add(new RowDefinition() { });
+            }
+
+            //A partir d'ici on génèrera l'environnement
+
 
         }
     }
