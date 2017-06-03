@@ -1,4 +1,6 @@
-﻿namespace AntBox
+﻿using AntBox.Environnement;
+
+namespace AntBox
 {
 	public abstract class ObjetAbstrait
 	{

@@ -1,20 +1,27 @@
 ﻿using System;
-namespace AntBox
+using AntBox.Environnement;
+
+namespace AntBox.Factory
 {
 	public class FabriqueFourmiliere : FabriqueAbstraite
 	{
-		public FabriqueFourmiliere()
+        const string TypeObjetNourriture = "nourriture";
+        const string TypeObjetOeuf       = "oeuf";
+        const string TypeObjetPheromone  = "pheromone";
+
+        public FabriqueFourmiliere()
 		{
 		}
 
-		public override AccesAbstrait CreerAcces(ZoneAbstraite zoneDebut, ZoneAbstraite zoneFin)
+        public override AccesAbstrait CreerAcces(ZoneAbstraite zoneDebut, ZoneAbstraite zoneFin)
 		{
-			throw new NotImplementedException();
-		}
+            return new Acces(zoneDebut, zoneFin);
+        }
 
-		public override EnvironnementAbstrait CreerEnvironnement()
+
+        public override EnvironnementAbstrait CreerEnvironnement()
 		{
-			throw new NotImplementedException();
+            return new Jardin();
 		}
 
 
@@ -22,17 +29,31 @@ namespace AntBox
         //génère des Fourmi à partir d'une fabrique concrète
 		public override ObjetAbstrait CreerObjet(string nom)
 		{
-			throw new NotImplementedException();
+            switch (nom)
+            {
+                case TypeObjetNourriture: return new Nourriture();
+                case TypeObjetOeuf: return new Oeuf();
+                case TypeObjetPheromone: return new Pheromone();
+                default: throw new NotImplementedException();
+            }      
 		}
 
-		public override PersonnageAbstrait CreerPersonnage(string nom)
+        //création d'une fourmi avec point de vie par défaut 
+        public override PersonnageAbstrait CreerPersonnage(string nom)
 		{
-			throw new NotImplementedException();
-		}
+            return new Fourmi(nom);
+        }
 
-		public override ZoneAbstraite CreerZone(string nom)
+        //création d'une fourmi sans points de vie par défaut
+        public override PersonnageAbstrait CreerPersonnage(string nom, int desPointsDeVie)
+        {
+            return new Fourmi(nom, desPointsDeVie);
+        }
+
+        //création d'un boutDeTerrain
+        public override ZoneAbstraite CreerZone(string nom)
 		{
-			return new BoutDeTerrain(nom);
+            return new BoutDeTerrain(nom);
 		}
 	}
 }

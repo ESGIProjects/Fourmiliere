@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using AntBox.Environnement;
 
 namespace AntBox
 {
     public class Fourmi : PersonnageAbstrait
 	{
-        public Fourmi(string unNom, int desPointsDeVie) : base(unNom, desPointsDeVie)
+        public Fourmi(string unNom, int desPointsDeVie=10) : base(unNom, desPointsDeVie)
 		{
 		}
 

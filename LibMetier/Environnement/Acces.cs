@@ -1,5 +1,5 @@
 ﻿using System;
-namespace AntBox
+namespace AntBox.Environnement
 {
 	public class Acces : AccesAbstrait
 	{

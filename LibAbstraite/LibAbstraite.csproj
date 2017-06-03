@@ -44,7 +44,6 @@
     <Compile Include="Environnement\EnvironnementAbstrait.cs" />
     <Compile Include="Environnement\ZoneAbstraite.cs" />
     <Compile Include="Fabrique\FabriqueAbstraite.cs" />
-    <Compile Include="Fabrique\FabriquePersonnage.cs" />
     <Compile Include="Objets\ObjetAbstrait.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Agents\PersonnageAbstrait.cs" />

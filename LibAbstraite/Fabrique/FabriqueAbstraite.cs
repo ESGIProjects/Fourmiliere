@@ -1,6 +1,7 @@
 ﻿using System;
+using AntBox.Environnement;
 
-namespace AntBox
+namespace AntBox.Factory
 {
 	public abstract class FabriqueAbstraite
 	{
@@ -8,9 +9,10 @@ namespace AntBox
 
 		public abstract AccesAbstrait CreerAcces(ZoneAbstraite zoneDebut, ZoneAbstraite zoneFin);
 		public abstract EnvironnementAbstrait CreerEnvironnement();
-		public abstract ObjetAbstrait CreerObjet(string nom);	//TODO chercher si l'objet à créer peur varier (avec un param en plus)
-		public abstract PersonnageAbstrait CreerPersonnage(string nom); //TODO idem objet
-		public abstract ZoneAbstraite CreerZone(string nom);
+		public abstract ObjetAbstrait CreerObjet(string nom);
+        public abstract PersonnageAbstrait CreerPersonnage(string nom);
+        public abstract PersonnageAbstrait CreerPersonnage(string nom, int desPointsDeVie);
+        public abstract ZoneAbstraite CreerZone(string nom);
 
 	}
 }

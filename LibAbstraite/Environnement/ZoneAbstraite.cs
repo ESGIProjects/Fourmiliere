@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace AntBox
+namespace AntBox.Environnement
 {
 	public abstract class ZoneAbstraite
 	{
@@ -21,5 +21,13 @@ namespace AntBox
 		{
 			this.Nom = unNom;
 		}
-	}
+
+        public override string ToString()
+        {
+            return this.Nom +
+                "\n   " + string.Join("\n   ", AccesList) +
+                "\n   " + PersonnageList.Count + " personnages"+
+                "\n   " + ObjetList.Count + " objets";
+        }
+    }
 }
