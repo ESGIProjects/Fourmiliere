@@ -9,3 +9,8 @@ C:\Users\fabien.griselles\Documents\Visual Studio 2017\Projects\Fourmiliere\LibA
 C:\Users\fabien.griselles\Documents\Visual Studio 2017\Projects\Fourmiliere\LibAbstraite\obj\Debug\LibAbstraite.dll
 C:\Users\fabien.griselles\Documents\Visual Studio 2017\Projects\Fourmiliere\LibAbstraite\obj\Debug\LibAbstraite.pdb
 C:\Users\fabien.griselles\Documents\Visual Studio 2017\Projects\Fourmiliere\LibAbstraite\obj\Debug\LibAbstraite.csprojResolveAssemblyReference.cache
+C:\Users\kevin\Desktop\AntBox\LibAbstraite\bin\Debug\LibAbstraite.dll
+C:\Users\kevin\Desktop\AntBox\LibAbstraite\bin\Debug\LibAbstraite.pdb
+C:\Users\kevin\Desktop\AntBox\LibAbstraite\obj\Debug\LibAbstraite.csprojResolveAssemblyReference.cache
+C:\Users\kevin\Desktop\AntBox\LibAbstraite\obj\Debug\LibAbstraite.dll
+C:\Users\kevin\Desktop\AntBox\LibAbstraite\obj\Debug\LibAbstraite.pdb

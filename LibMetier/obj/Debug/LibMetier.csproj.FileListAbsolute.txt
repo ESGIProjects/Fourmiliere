@@ -13,3 +13,10 @@ C:\Users\fabien.griselles\Documents\Visual Studio 2017\Projects\Fourmiliere\LibM
 C:\Users\fabien.griselles\Documents\Visual Studio 2017\Projects\Fourmiliere\LibMetier\bin\Debug\LibMetier.pdb
 C:\Users\fabien.griselles\Documents\Visual Studio 2017\Projects\Fourmiliere\LibMetier\bin\Debug\LibAbstraite.dll
 C:\Users\fabien.griselles\Documents\Visual Studio 2017\Projects\Fourmiliere\LibMetier\bin\Debug\LibAbstraite.pdb
+C:\Users\kevin\Desktop\AntBox\LibMetier\bin\Debug\LibMetier.dll
+C:\Users\kevin\Desktop\AntBox\LibMetier\bin\Debug\LibMetier.pdb
+C:\Users\kevin\Desktop\AntBox\LibMetier\bin\Debug\LibAbstraite.dll
+C:\Users\kevin\Desktop\AntBox\LibMetier\bin\Debug\LibAbstraite.pdb
+C:\Users\kevin\Desktop\AntBox\LibMetier\obj\Debug\LibMetier.csprojResolveAssemblyReference.cache
+C:\Users\kevin\Desktop\AntBox\LibMetier\obj\Debug\LibMetier.dll
+C:\Users\kevin\Desktop\AntBox\LibMetier\obj\Debug\LibMetier.pdb

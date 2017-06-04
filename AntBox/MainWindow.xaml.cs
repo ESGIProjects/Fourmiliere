@@ -1,6 +1,7 @@
 ﻿using AntBox.Environnement;
 using AntBox.Factory;
 using System;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -16,6 +17,7 @@ namespace AntBox
         Button run = new Button();
         Button save = new Button();
         Button load = new Button();
+        Boolean generation = false;
 
         public MainWindow()
         {
@@ -32,7 +34,48 @@ namespace AntBox
 
         private void saveClick(object sender, RoutedEventArgs e)
         {
+            if (!generation) {
+                string message = "Commences une partie avant de vouloir sauvegarder, sale n00b !";
+                string titre = "Alerte aux gogoles";
+                MessageBoxButton mbb = MessageBoxButton.OK;
+                MessageBoxImage mbi = MessageBoxImage.Error;
+                MessageBox.Show(message, titre, mbb, mbi);
+            }
+            else
+            {
+                if (File.Exists("save.xml"))
+                {
+                    string messageFile = "Ecraser l'ancienne sauvegarde ?";
+                    string titreFile = "Confirmer suppression";
+                    MessageBoxButton mbbFile = MessageBoxButton.YesNo;
+                    MessageBoxImage mbiFile = MessageBoxImage.Question;
+                    MessageBoxResult mbr = MessageBox.Show(messageFile, titreFile, mbbFile, mbiFile);
+                    if(mbr == MessageBoxResult.Yes)
+                    {
+                        File.Delete("save.xml");
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+                new System.Xml.Linq.XDocument(
+                    new System.Xml.Linq.XElement("grid",
+                         new System.Xml.Linq.XElement("rows", Grille.RowDefinitions.Count),
+                         new System.Xml.Linq.XElement("cols", Grille.ColumnDefinitions.Count)
+                    )
+                ).Save("save.xml");
+                
+                System.Media.SoundPlayer sp = new System.Media.SoundPlayer("SavePokemon.wav");
+                sp.Load();
+                sp.Play();
 
+                string message = "Sauvegarde effectuée !";
+                string titre = "Sauvegarde";
+                MessageBoxButton mbb = MessageBoxButton.OK;
+                MessageBoxImage mbi = MessageBoxImage.None;
+                MessageBox.Show(message, titre, mbb, mbi);
+            }
         }
 
         private void loadClick(object sender, RoutedEventArgs e)
@@ -54,6 +97,25 @@ namespace AntBox
 
         private void genererClick(object sender, RoutedEventArgs e)
         {
+
+            if (generation) {
+                string message = "Une grille est déjà générée, voulez-vous en générer une nouvelle ?";
+                string titre = "Avertissement";
+                MessageBoxButton mbb = MessageBoxButton.YesNo;
+                MessageBoxImage mbi = MessageBoxImage.Warning;
+                MessageBoxResult mbr =  MessageBox.Show(message, titre, mbb, mbi);
+                if(mbr == MessageBoxResult.Yes)
+                {
+                    Grille.RowDefinitions.Clear();
+                    Grille.ColumnDefinitions.Clear();
+                    Grille.Children.Clear();
+                }
+                else
+                {
+                    return;
+                }
+            }
+
             Console.WriteLine("Génération de la fourmilière");
             int nbColonne   = 3;
             int nbLigne     = 2;
@@ -121,6 +183,7 @@ namespace AntBox
 
 
             Console.Write(jardin.Statistiques());
+            generation = true;
         }
     }
 }
