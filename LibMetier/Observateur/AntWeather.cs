@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AntBox.Observateur
 {
-    public class AntWeather : Sujet
+    public class AntWeather : Subject
     {
         public AntWeather()
         {

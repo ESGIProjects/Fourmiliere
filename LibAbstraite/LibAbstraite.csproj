@@ -46,7 +46,7 @@
     <Compile Include="Fabrique\FabriqueAbstraite.cs" />
     <Compile Include="Objets\ObjetAbstrait.cs" />
     <Compile Include="Observateur\Observer.cs" />
-    <Compile Include="Observateur\Sujet.cs" />
+    <Compile Include="Observateur\Subject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Agents\PersonnageAbstrait.cs" />
   </ItemGroup>

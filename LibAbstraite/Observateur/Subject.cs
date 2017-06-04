@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AntBox.Observateur
 {
-    public abstract class Sujet
+    public abstract class Subject
     {
         public List<Observer> ListObservateur { get; protected set; } = new List<Observer>();
 

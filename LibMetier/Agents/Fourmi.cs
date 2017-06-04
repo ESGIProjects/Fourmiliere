@@ -7,7 +7,7 @@ namespace AntBox
 {
     public class Fourmi : PersonnageAbstrait
 	{
-        public Fourmi(string unNom, Sujet unObservé, int desPointsDeVie=10) : base(unNom, unObservé, desPointsDeVie )
+        public Fourmi(string unNom, Subject unObservé, int desPointsDeVie=10) : base(unNom, unObservé, desPointsDeVie )
 		{
 		}
 
