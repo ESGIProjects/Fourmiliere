@@ -5,7 +5,7 @@ using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-
+using AntBox.Observateur;
 namespace AntBox
 {
     /// <summary>
@@ -27,9 +27,16 @@ namespace AntBox
 
         private void runClick(object sender, RoutedEventArgs e)
         {
+            AntWeather antWeatherForecast = new AntWeather();
+
             Console.WriteLine("Création d'une super Fourmi");
-            Fourmi fourmi = new Fourmi("superFourmi", 9999);
+            Fourmi fourmi = new Fourmi("superFourmi", antWeatherForecast);
             MessageBox.Show("Création d'une super fourmi", "SUper Fourmiiiiii");
+
+
+
+            antWeatherForecast.Etat = "Il fait beau";
+
         }
 
         private void saveClick(object sender, RoutedEventArgs e)
@@ -65,10 +72,12 @@ namespace AntBox
                          new System.Xml.Linq.XElement("cols", Grille.ColumnDefinitions.Count)
                     )
                 ).Save("save.xml");
-                
-                System.Media.SoundPlayer sp = new System.Media.SoundPlayer("SavePokemon.wav");
+
+
+               System.Media.SoundPlayer sp = new System.Media.SoundPlayer(AntBox.Properties.Resources.kaching);
                 sp.Load();
                 sp.Play();
+
 
                 string message = "Sauvegarde effectuée !";
                 string titre = "Sauvegarde";
@@ -116,6 +125,7 @@ namespace AntBox
                 }
             }
 
+            //Cette partie permet de générer dynamiquement la grille en wpf
             Console.WriteLine("Génération de la fourmilière");
             int nbColonne   = 3;
             int nbLigne     = 2;
@@ -146,6 +156,7 @@ namespace AntBox
 
             int nombreZone = 0;
 
+            //génération du jardin
             for (int y= 1; y <= nbLigne; y++) {
                 for (int x= 1; x <= nbColonne; x++)
                 {
@@ -183,6 +194,8 @@ namespace AntBox
 
 
             Console.Write(jardin.Statistiques());
+
+
             generation = true;
         }
     }

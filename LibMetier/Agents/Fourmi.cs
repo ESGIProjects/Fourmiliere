@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using AntBox.Environnement;
+using AntBox.Observateur;
 
 namespace AntBox
 {
     public class Fourmi : PersonnageAbstrait
 	{
-        public Fourmi(string unNom, int desPointsDeVie=10) : base(unNom, desPointsDeVie)
+        public Fourmi(string unNom, Sujet unObservé, int desPointsDeVie=10) : base(unNom, unObservé, desPointsDeVie )
 		{
 		}
 
@@ -30,5 +31,9 @@ namespace AntBox
 			return "Je suis "+Nom+" la fourmi (PV : "+PointDeVie+")";
 		}
 
-	}
+        public override void Update()
+        {
+            Console.Write(Nom + "sait que " + Observe.Etat);
+        }
+    }
 }

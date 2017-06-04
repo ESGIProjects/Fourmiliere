@@ -36,6 +36,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -109,6 +110,15 @@
       <Project>{30d8a1c9-681e-42ef-8149-ae96a5a4fdb2}</Project>
       <Name>LibMetier</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\kaching.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fanfare.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ant.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

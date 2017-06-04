@@ -48,6 +48,7 @@
     <Compile Include="Objets\Nourriture.cs" />
     <Compile Include="Objets\Oeuf.cs" />
     <Compile Include="Objets\Pheromone.cs" />
+    <Compile Include="Observateur\AntWeather.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

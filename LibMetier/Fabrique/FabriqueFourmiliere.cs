@@ -39,15 +39,15 @@ namespace AntBox.Factory
 		}
 
         //création d'une fourmi avec point de vie par défaut 
-        public override PersonnageAbstrait CreerPersonnage(string nom)
+        public override PersonnageAbstrait CreerPersonnage(string nom, Observateur.Sujet unObservé)
 		{
-            return new Fourmi(nom);
+            return new Fourmi(nom, unObservé);
         }
 
         //création d'une fourmi sans points de vie par défaut
-        public override PersonnageAbstrait CreerPersonnage(string nom, int desPointsDeVie)
+        public override PersonnageAbstrait CreerPersonnage(string nom, Observateur.Sujet unObservé, int desPointsDeVie)
         {
-            return new Fourmi(nom, desPointsDeVie);
+            return new Fourmi(nom, unObservé, desPointsDeVie);
         }
 
         //création d'un boutDeTerrain
