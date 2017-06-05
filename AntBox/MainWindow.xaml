@@ -8,6 +8,9 @@
         Title="AntBox"
         WindowState="Maximized"
         ResizeMode="CanMinimize">
+    
+    
+    
     <Grid ShowGridLines="False">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="25*" />
@@ -17,6 +20,8 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="20*" />
         </Grid.RowDefinitions>
+        
+        
         <Grid Grid.Row="0" Grid.Column="0" ShowGridLines="True" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -25,6 +30,7 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
+            
             <Button Content="Générer"
                 Width="Auto"
                 Height="Auto"
@@ -56,7 +62,22 @@
                 Click="loadClick"
             />
         </Grid>
-        <Grid Grid.Column="1" Grid.Row="1" Name="Grille" ShowGridLines="True">
+
+        <ListBox Grid.Column="0" Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Auto" ItemsSource="{Binding ListBoxData}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="{Binding Line1}" FontSize="14px" FontWeight="Bold" />
+                        <TextBlock Text="{Binding Line2}" FontSize="10px" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        
+        <Grid Grid.Column="1" Grid.Row="1" Name="Grille" ShowGridLines="True" Background="AliceBlue">
         </Grid>
     </Grid>
+    
+    
+    
 </Window>

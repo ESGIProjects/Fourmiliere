@@ -9,9 +9,20 @@ using AntBox.Observateur;
 using System.Drawing;
 using System.Windows.Shapes;
 using System.Windows.Media.Imaging;
+using System.Collections.Generic;
 
 namespace AntBox
-{
+{ 
+    /// <summary>
+    /// Petite classe interne pour tester le layout tout
+    /// en ayant quelque chose à binder
+    /// </summary>
+    public class MyRow
+    {
+        public string Line1 { get; set; }
+        public string Line2 { get; set; }
+    }
+
     /// <summary>
     /// Logique d'interaction pour MainWindow.xaml
     /// </summary>
@@ -22,11 +33,21 @@ namespace AntBox
         Button save = new Button();
         Button load = new Button();
         Boolean generation = false;
+        public List<MyRow> ListBoxData { get; set; }
 
         public MainWindow()
         {
             InitializeComponent();
-            Grille.Background = new SolidColorBrush(Colors.AliceBlue);
+
+            // Fake data pour le layout
+            ListBoxData = new List<MyRow>
+            {
+                new MyRow{Line1 = "Fourmi 1", Line2 = "Etat 1"},
+                new MyRow{Line1 = "Fourmi 2", Line2 = "Etat 2"},
+                new MyRow{Line1 = "Fourmi 3", Line2 = "Etat 3"}
+            };
+
+            DataContext = this;
         }
 
         private void runClick(object sender, RoutedEventArgs e)
