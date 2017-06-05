@@ -16,13 +16,22 @@ namespace AntBox
 			throw new NotImplementedException();
 		}
 
-		public ZoneAbstraite ChoixZoneSuivante(List<AccesAbstrait> accesList)
+		public override ZoneAbstraite ChoixZoneSuivante(List<AccesAbstrait> accesList, ZoneAbstraite zoneActuelle)
 		{
-			throw new NotImplementedException();
+            if (accesList.Count <= 0)
+                throw new Exception("Fourmi ne peux pas se décider quand accesList est vide");
+
+            AccesAbstrait accesSuivant;
+            Random random = new Random();
+
+            accesSuivant = accesList[random.Next(1, accesList.Count)-1];
+
+            return (accesSuivant.ZoneDebut == zoneActuelle) ? accesSuivant.ZoneFin : accesSuivant.ZoneDebut;
 		}
 
 		public override void Execution()
 		{
+            //TODOvoir si on implémente état ou stratégie... stratégie me semble plus adéquat
 			throw new NotImplementedException();
 		}
 

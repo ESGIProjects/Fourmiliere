@@ -6,6 +6,10 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using AntBox.Observateur;
+using System.Drawing;
+using System.Windows.Shapes;
+using System.Windows.Media.Imaging;
+
 namespace AntBox
 {
     /// <summary>
@@ -31,9 +35,7 @@ namespace AntBox
 
             Console.WriteLine("Création d'une super Fourmi");
             Fourmi fourmi = new Fourmi("superFourmi", antWeatherForecast);
-            MessageBox.Show("Création d'une super fourmi", "SUper Fourmiiiiii");
-
-
+            MessageBox.Show("Création d'une super fourmi", "Super Fourmiiiiii");
 
             antWeatherForecast.Etat = "Il fait beau";
 
@@ -127,8 +129,8 @@ namespace AntBox
 
             //Cette partie permet de générer dynamiquement la grille en wpf
             Console.WriteLine("Génération de la fourmilière");
-            int nbColonne   = 3;
-            int nbLigne     = 2;
+            int nbColonne   = 10;
+            int nbLigne     = 5;
 
             for (int i = 0; i < nbColonne; i++) {
                 Grille.ColumnDefinitions.Add(new ColumnDefinition() {  });
@@ -176,6 +178,7 @@ namespace AntBox
                         zoneDebut   = jardin.ZoneList[nombreZone-2];
                         zoneFin     = jardin.ZoneList[nombreZone-1];
                         acces       = fabriqueAbstraiteFourmiliere.CreerAcces(zoneDebut, zoneFin);
+                        
                         jardin.AjouteChemins(acces);
                     }
 
@@ -193,7 +196,35 @@ namespace AntBox
             //FIN TODO ajouter le client qui va utiliser la fabriqueAbstraite et faire le code suivant
 
 
+
+            //TODO TODO TODO TODO
+            //TODO Création et positionnement d'une fourmi
+            Random random  = new Random();
+            int colX =  random.Next(1, nbColonne);
+            int colY = random.Next(1, nbLigne);
+
+            AntWeather antWeatherForecast = new AntWeather();
+
+            var zone = jardin.ZoneList[((colY-1) * nbColonne + colX - 1)];
+            zone.AjouterPersonnage(fabriqueAbstraiteFourmiliere.CreerPersonnage("Fourmi 1", antWeatherForecast));
+
+            
+            //ceci est une fourmi ;)
+            Ellipse ellipse = new Ellipse();
+            ellipse.Fill = new SolidColorBrush(Colors.Red);
+            ellipse.Margin = new Thickness(3);
+            Grille.Children.Add(ellipse);
+            Grid.SetColumn(ellipse, colX);
+            Grid.SetRow(ellipse, colY);
+            //FIN TODO création et positionnement d'une fourmi
+
+
             Console.Write(jardin.Statistiques());
+            Console.Write("\n"+zone + " x : " + colX + " y : " + colY);
+            Console.Write(jardin.Simuler());
+
+
+
 
 
             generation = true;

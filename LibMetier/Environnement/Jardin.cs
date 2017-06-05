@@ -62,8 +62,16 @@ namespace AntBox.Environnement
 
         public override string Simuler()
         {
-            //TODO
-            throw new NotImplementedException();
+            ZoneAbstraite zoneSelectionne;
+            String simulation = "";
+
+           foreach (ZoneAbstraite zone in ZoneList) {
+                foreach(PersonnageAbstrait personnage in zone.PersonnageList) {
+                    zoneSelectionne = personnage.ChoixZoneSuivante(zone.AccesList, zone);
+                    simulation += "\n" + personnage.Nom + " devrait se rendre sur : " + zoneSelectionne.Nom;
+                }
+            }
+            return simulation;
         }
 
         public override string Statistiques()

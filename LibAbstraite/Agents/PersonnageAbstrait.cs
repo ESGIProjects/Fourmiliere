@@ -12,9 +12,12 @@ namespace AntBox
 		public int PointDeVie { get; protected set; }
         public Subject Observe { get; protected set; }
 
+
         public ZoneAbstraite Position { get; protected set; }
 
-		public abstract void AnalyseSituation();
+        public abstract ZoneAbstraite ChoixZoneSuivante(List<AccesAbstrait> accesList, ZoneAbstraite zoneActuelle);
+
+        public abstract void AnalyseSituation();
 
 		public abstract void Execution();
 
@@ -24,6 +27,5 @@ namespace AntBox
             Observe = observe;
             observe.Attach(this);
 		}
-
-	}
+    }
 }
