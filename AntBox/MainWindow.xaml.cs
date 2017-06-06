@@ -130,6 +130,15 @@ namespace AntBox
         private void genererClick(object sender, RoutedEventArgs e)
         {
 
+            int nbLigne = 0;
+            int nbColonne = 0;
+
+            CustomDialog cd = new CustomDialog("Veuillez saisir le nombre de lignes : ", "Veuillez saisir le nombre de colonnes :", "");
+            cd.ShowDialog();
+
+            nbLigne = cd.getX;
+            nbColonne = cd.getY;
+
             if (generation) {
                 string message = "Une grille est déjà générée, voulez-vous en générer une nouvelle ?";
                 string titre = "Avertissement";
@@ -150,8 +159,6 @@ namespace AntBox
 
             //Cette partie permet de générer dynamiquement la grille en wpf
             Console.WriteLine("Génération de la fourmilière");
-            int nbColonne   = 10;
-            int nbLigne     = 5;
 
             for (int i = 0; i < nbColonne; i++) {
                 Grille.ColumnDefinitions.Add(new ColumnDefinition() {  });
