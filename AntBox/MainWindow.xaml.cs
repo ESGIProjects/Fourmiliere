@@ -136,6 +136,11 @@ namespace AntBox
             CustomDialog cd = new CustomDialog("Veuillez saisir le nombre de lignes : ", "Veuillez saisir le nombre de colonnes :", "");
             cd.ShowDialog();
 
+            if(cd.X.Text == "" || cd.Y.Text == "")
+            {
+                return;
+            }
+
             nbLigne = cd.getX;
             nbColonne = cd.getY;
 
