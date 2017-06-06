@@ -6,7 +6,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using AntBox.Observateur;
-using System.Drawing;
 using System.Windows.Shapes;
 using System.Windows.Media.Imaging;
 using System.Collections.Generic;
@@ -221,27 +220,46 @@ namespace AntBox
             //TODO TODO TODO TODO
             //TODO Création et positionnement d'une fourmi
             Random random  = new Random();
-            int colX =  random.Next(1, nbColonne);
-            int colY = random.Next(1, nbLigne);
+            Uri uriAnt = new Uri("./Resources/ant.png", UriKind.Relative);
 
-            AntWeather antWeatherForecast = new AntWeather();
 
-            var zone = jardin.ZoneList[((colY-1) * nbColonne + colX - 1)];
-            zone.AjouterPersonnage(fabriqueAbstraiteFourmiliere.CreerPersonnage("Fourmi 1", antWeatherForecast));
+            for (int a = 0; a < 5; a++)
+            {
+                int colX = random.Next(1, nbColonne);
+                int colY = random.Next(1, nbLigne);
 
-            
+                AntWeather antWeatherForecast = new AntWeather();
+
+                var zone = jardin.ZoneList[((colY - 1) * nbColonne + colX - 1)];
+                zone.AjouterPersonnage(fabriqueAbstraiteFourmiliere.CreerPersonnage("Fourmi 1", antWeatherForecast));
+
+                System.Windows.Controls.Image image = new System.Windows.Controls.Image();
+                image.Source = new BitmapImage(uriAnt);
+                Grille.Children.Add(image);
+                Grid.SetColumn(image, colX);
+                Grid.SetRow(image, colY);
+            }
+            //FIN TODO création et positionnement d'une fourmi
+
+
+
+
+
+
             //ceci est une fourmi ;)
             Ellipse ellipse = new Ellipse();
             ellipse.Fill = new SolidColorBrush(Colors.Red);
             ellipse.Margin = new Thickness(3);
             Grille.Children.Add(ellipse);
-            Grid.SetColumn(ellipse, colX);
-            Grid.SetRow(ellipse, colY);
-            //FIN TODO création et positionnement d'une fourmi
+            Grid.SetColumn(ellipse, 0);
+            Grid.SetRow(ellipse, 0);
 
+            Grid.SetColumnSpan(ellipse, nbColonne);
+            Grid.SetRowSpan(ellipse, nbLigne);
+
+            ellipse.Opacity = 0.5;
 
             Console.Write(jardin.Statistiques());
-            Console.Write("\n"+zone + " x : " + colX + " y : " + colY);
             Console.Write(jardin.Simuler());
 
 
