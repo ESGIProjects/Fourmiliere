@@ -31,8 +31,7 @@ namespace AntBox.Observateur
         }
 
         public void Notify() {
-            foreach (Observer observateur in ListObservateur)
-            {
+            foreach (Observer observateur in ListObservateur) {
                 observateur.Update();
             }
         }

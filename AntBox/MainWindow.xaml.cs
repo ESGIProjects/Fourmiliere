@@ -129,6 +129,20 @@ namespace AntBox
         private void genererClick(object sender, RoutedEventArgs e)
         {
 
+            int nbLigne = 0;
+            int nbColonne = 0;
+
+            CustomDialog cd = new CustomDialog("Veuillez saisir le nombre de lignes : ", "Veuillez saisir le nombre de colonnes :", "");
+            cd.ShowDialog();
+
+            if(cd.X.Text == "" || cd.Y.Text == "")
+            {
+                return;
+            }
+
+            nbLigne = cd.getX;
+            nbColonne = cd.getY;
+
             if (generation) {
                 string message = "Une grille est déjà générée, voulez-vous en générer une nouvelle ?";
                 string titre = "Avertissement";
@@ -149,8 +163,6 @@ namespace AntBox
 
             //Cette partie permet de générer dynamiquement la grille en wpf
             Console.WriteLine("Génération de la fourmilière");
-            int nbColonne   = 10;
-            int nbLigne     = 5;
 
             for (int i = 0; i < nbColonne; i++) {
                 Grille.ColumnDefinitions.Add(new ColumnDefinition() {  });
@@ -221,17 +233,17 @@ namespace AntBox
             //TODO Création et positionnement d'une fourmi
             Random random  = new Random();
             Uri uriAnt = new Uri("./Resources/ant.png", UriKind.Relative);
-
+            AntWeather antWeatherForecast = new AntWeather();
 
             for (int a = 0; a < 5; a++)
             {
                 int colX = random.Next(1, nbColonne);
                 int colY = random.Next(1, nbLigne);
 
-                AntWeather antWeatherForecast = new AntWeather();
+                
 
                 var zone = jardin.ZoneList[((colY - 1) * nbColonne + colX - 1)];
-                zone.AjouterPersonnage(fabriqueAbstraiteFourmiliere.CreerPersonnage("Fourmi 1", antWeatherForecast));
+                zone.AjouterPersonnage(fabriqueAbstraiteFourmiliere.CreerPersonnage("Fourmi "+a, antWeatherForecast));
 
                 System.Windows.Controls.Image image = new System.Windows.Controls.Image();
                 image.Source = new BitmapImage(uriAnt);
@@ -246,7 +258,7 @@ namespace AntBox
 
 
 
-            //ceci est une fourmi ;)
+           //TODO elipse
             Ellipse ellipse = new Ellipse();
             ellipse.Fill = new SolidColorBrush(Colors.Red);
             ellipse.Margin = new Thickness(3);
@@ -258,11 +270,15 @@ namespace AntBox
             Grid.SetRowSpan(ellipse, nbLigne);
 
             ellipse.Opacity = 0.5;
+            //TODO fin elipse
 
-            Console.Write(jardin.Statistiques());
-            Console.Write(jardin.Simuler());
+            
 
 
+            Console.WriteLine(jardin.Statistiques());
+            Console.WriteLine(jardin.Simuler());
+
+            antWeatherForecast.Etat = "Il fait beau !";
 
 
 

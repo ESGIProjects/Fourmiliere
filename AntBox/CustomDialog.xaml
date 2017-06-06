@@ -1,0 +1,39 @@
+﻿<Window x:Class="AntBox.CustomDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AntBox"
+        mc:Ignorable="d"
+        Title="Taille de la grille"
+        ContentRendered="Window_ContentRendered"
+        SizeToContent="WidthAndHeight">
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Label Name="labelX" Grid.Row="0">Nombre de lignes :</Label>
+        <TextBox Name="X" Grid.Row="1" MinWidth="250"></TextBox>
+
+        <Label Name="labelY" Grid.Row="2">Nombre de colonnes :</Label>
+        <TextBox Name="Y" Grid.Row="3" MinWidth="250"></TextBox>
+
+        <Grid Grid.Row="4" Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button IsDefault="True" Name="btnDialogOk" Click="okClick" Grid.Column="0">Ok</Button>
+            <Button IsCancel="True" Name="btnDialogCancel" Click="cancelClick" Grid.Column="2">Annuler</Button>
+        </Grid>
+    </Grid>
+</Window>

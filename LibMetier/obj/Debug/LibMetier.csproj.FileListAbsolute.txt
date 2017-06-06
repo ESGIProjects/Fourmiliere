@@ -20,3 +20,10 @@ C:\Users\kevin\Desktop\AntBox\LibMetier\bin\Debug\LibAbstraite.pdb
 C:\Users\kevin\Desktop\AntBox\LibMetier\obj\Debug\LibMetier.csprojResolveAssemblyReference.cache
 C:\Users\kevin\Desktop\AntBox\LibMetier\obj\Debug\LibMetier.dll
 C:\Users\kevin\Desktop\AntBox\LibMetier\obj\Debug\LibMetier.pdb
+C:\Users\kevin\Desktop\C#\Fourmiliere\LibMetier\bin\Debug\LibMetier.dll
+C:\Users\kevin\Desktop\C#\Fourmiliere\LibMetier\bin\Debug\LibMetier.pdb
+C:\Users\kevin\Desktop\C#\Fourmiliere\LibMetier\bin\Debug\LibAbstraite.dll
+C:\Users\kevin\Desktop\C#\Fourmiliere\LibMetier\bin\Debug\LibAbstraite.pdb
+C:\Users\kevin\Desktop\C#\Fourmiliere\LibMetier\obj\Debug\LibMetier.csprojResolveAssemblyReference.cache
+C:\Users\kevin\Desktop\C#\Fourmiliere\LibMetier\obj\Debug\LibMetier.dll
+C:\Users\kevin\Desktop\C#\Fourmiliere\LibMetier\obj\Debug\LibMetier.pdb

@@ -42,7 +42,7 @@ namespace AntBox
 
         public override void Update()
         {
-            Console.Write(Nom + "sait que " + Observe.Etat);
+            Console.WriteLine(Nom + " sait que " + Observe.Etat);
         }
     }
 }
