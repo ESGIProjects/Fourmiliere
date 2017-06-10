@@ -41,10 +41,7 @@ namespace AntBox
 
         public void Window_ContentRendered(object sender, EventArgs e)
         {
-            X.SelectAll();
             X.Focus();
-            Y.SelectAll();
-            Y.Focus();
         }
 
         public int getX

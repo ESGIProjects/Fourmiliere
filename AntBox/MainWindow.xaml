@@ -63,12 +63,12 @@
             />
         </Grid>
 
-        <ListBox Grid.Column="0" Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Auto" ItemsSource="{Binding ListBoxData}">
+        <ListBox Grid.Column="0" Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Auto" ItemsSource="{Binding jardin.ZoneList}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
-                        <TextBlock Text="{Binding Line1}" FontSize="14px" FontWeight="Bold" />
-                        <TextBlock Text="{Binding Line2}" FontSize="10px" />
+                        <TextBlock Text="{Binding Nom}" FontSize="14px" FontWeight="Bold" />
+                        <TextBlock Text="{Binding PointDeVie}" FontSize="10px" />
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>

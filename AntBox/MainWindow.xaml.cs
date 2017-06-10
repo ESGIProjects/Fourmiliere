@@ -9,6 +9,7 @@ using AntBox.Observateur;
 using System.Windows.Shapes;
 using System.Windows.Media.Imaging;
 using System.Collections.Generic;
+using System.Collections;
 
 namespace AntBox
 { 
@@ -33,6 +34,8 @@ namespace AntBox
         Button load = new Button();
         Boolean generation = false;
         public List<MyRow> ListBoxData { get; set; }
+
+        public EnvironnementAbstrait jardin { get; set; }
 
         public MainWindow()
         {
@@ -132,7 +135,7 @@ namespace AntBox
             int nbLigne = 0;
             int nbColonne = 0;
 
-            CustomDialog cd = new CustomDialog("Veuillez saisir le nombre de lignes : ", "Veuillez saisir le nombre de colonnes :", "");
+            CustomDialog cd = new CustomDialog("Veuillez saisir le nombre de colonnes : ", "Veuillez saisir le nombre de lignes :", "");
             cd.ShowDialog();
 
             if(cd.X.Text == "" || cd.Y.Text == "")
@@ -170,14 +173,13 @@ namespace AntBox
             for (int i = 0; i < nbLigne; i++) {
                 Grille.RowDefinitions.Add(new RowDefinition() { });
             }
-
-
+ 
             //A partir d'ici on génèrera l'environnement
             Console.WriteLine("Génération de la fourmilière");
 
             FabriqueFourmiliere fabriqueAbstraiteFourmiliere = new FabriqueFourmiliere();
-            EnvironnementAbstrait jardin = fabriqueAbstraiteFourmiliere.CreerEnvironnement();
-
+            //EnvironnementAbstrait jardin = fabriqueAbstraiteFourmiliere.CreerEnvironnement();
+            jardin = fabriqueAbstraiteFourmiliere.CreerEnvironnement();
 
             //TODO TODO TODO
             //TODO ajouter le client qui va utiliser la fabriqueAbstraite et faire le code suivant
@@ -253,27 +255,11 @@ namespace AntBox
             }
             //FIN TODO création et positionnement d'une fourmi
 
-
-
-
-
-
-           //TODO elipse
-            Ellipse ellipse = new Ellipse();
-            ellipse.Fill = new SolidColorBrush(Colors.Red);
-            ellipse.Margin = new Thickness(3);
-            Grille.Children.Add(ellipse);
-            Grid.SetColumn(ellipse, 0);
-            Grid.SetRow(ellipse, 0);
-
-            Grid.SetColumnSpan(ellipse, nbColonne);
-            Grid.SetRowSpan(ellipse, nbLigne);
-
-            ellipse.Opacity = 0.5;
+            //TODO elipse
+            drawEllipse(Grille, 0, 0, nbColonne, nbLigne);
             //TODO fin elipse
 
             
-
 
             Console.WriteLine(jardin.Statistiques());
             Console.WriteLine(jardin.Simuler());
@@ -283,6 +269,32 @@ namespace AntBox
 
 
             generation = true;
+        }
+
+        public void drawEllipse(Grid grid, int x, int y, int colSpan = 1, int rowSpan = 1)
+        {
+            Ellipse ellipse = new Ellipse();
+            ellipse.Fill = new SolidColorBrush(Colors.Red);
+            ellipse.Margin = new Thickness(3);
+            ellipse.Opacity = 0.5;
+
+            grid.Children.Add(ellipse);
+            Grid.SetColumn(ellipse, x);
+            Grid.SetRow(ellipse, y);
+            Grid.SetColumnSpan(ellipse, colSpan);
+            Grid.SetRowSpan(ellipse, rowSpan);
+        }
+
+        public UIElement getGridChild(Grid grid, int x, int y)
+        {
+            foreach(UIElement element in grid.Children)
+            {
+                if (Grid.GetColumn(element) == x && Grid.GetRow(element) == y)
+                {
+                    return element;
+                }
+            }
+            return null;
         }
     }
 }
