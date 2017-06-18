@@ -32,7 +32,6 @@ namespace AntBox.Environnement
         public override void AjoutePersonnage(PersonnageAbstrait unPersonnage)
         {
             throw new NotImplementedException();
-            //TODO positionner ce personnage sur une zone ? 
         }
 
         public override void AjouteZoneAbstraites(params ZoneAbstraite[] zoneAbstraitesArray)
@@ -57,32 +56,13 @@ namespace AntBox.Environnement
 
         public override void DeplacerPersonnage(PersonnageAbstrait unPersonnage, ZoneAbstraite zoneSource, ZoneAbstraite zoneFin)
         {
-            //TODO
-            throw new NotImplementedException();
+            zoneSource.RetirerPersonnage(unPersonnage);
+            zoneFin.AjouterPersonnage(unPersonnage);
         }
-
-
-        /**
-         * 
-         */
-        public override string Simuler()
-        {
-            ZoneAbstraite zoneSelectionne;
-            String simulation = "";
-
-           foreach (ZoneAbstraite zone in ZoneList) {
-                foreach(PersonnageAbstrait personnage in zone.PersonnageList) {
-                    zoneSelectionne = personnage.ChoixZoneSuivante(zone.AccesList, zone);
-                    simulation += "\n" + personnage.Nom + " devrait se rendre sur : " + zoneSelectionne.Nom;
-                }
-            }
-            return simulation;
-        }
-
 
 
          /**
-          * 
+          * Méthode permettant d'afficher toute les données du jeu
           */
         public override string Statistiques()
         {   
@@ -167,6 +147,39 @@ namespace AntBox.Environnement
             }
 
 
+        }
+
+        /**
+         * 
+         */
+        public override string Simuler()
+        {
+            ZoneAbstraite zoneSelectionne;
+            String simulation = "";
+            PersonnageAbstrait personageEnCours;
+            List<PersonnageAbstrait> personnageAyantDejaBouge = new List<PersonnageAbstrait>();
+
+            foreach (ZoneAbstraite zone in ZoneList)
+            {
+                for (int a =0; a < zone.PersonnageList.Count; a++)
+                {
+                     
+                    personageEnCours = zone.PersonnageList[a];
+
+                    if (!personnageAyantDejaBouge.Contains(personageEnCours)) { 
+
+                        zoneSelectionne = personageEnCours.ChoixZoneSuivante(zone.AccesList, zone);
+                        simulation += "\n" + personageEnCours.Nom + " souhaite se rendre sur : " + zoneSelectionne.Nom;
+
+                        this.DeplacerPersonnage(personageEnCours, zone, zoneSelectionne);
+                        simulation += "\n" + personageEnCours.Nom + " vient de se déplacer";
+
+                        personageEnCours.Execution();
+                        personnageAyantDejaBouge.Add(personageEnCours);
+                    }
+                }
+            }
+            return simulation;
         }
     }
 }

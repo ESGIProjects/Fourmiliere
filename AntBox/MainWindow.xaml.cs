@@ -59,13 +59,11 @@ namespace AntBox
 
         private void runClick(object sender, RoutedEventArgs e)
         {
-            AntWeather antWeatherForecast = new AntWeather();
 
-            Console.WriteLine("Création d'une super Fourmi");
-            Fourmi fourmi = new Fourmi("superFourmi", antWeatherForecast);
-            MessageBox.Show("Création d'une super fourmi", "Super Fourmiiiiii");
 
-            antWeatherForecast.Etat = "Il fait beau";
+            Console.WriteLine("\n\n\nBOUCLE SIMULATION\n\n\n");
+            Console.WriteLine(jardin.Simuler());
+            genereAffichage();
 
         }
 
@@ -179,23 +177,20 @@ namespace AntBox
 
             //génération d'une fabrique / abstract factory
             FabriqueFourmiliere fabriqueAbstraiteFourmiliere = new FabriqueFourmiliere();
+            jardin = fabriqueAbstraiteFourmiliere.CreerEnvironnement();                     //création du jardin à partir de la fabrique.
 
-            //création du jardin à partir de la fabrique.
-            jardin = fabriqueAbstraiteFourmiliere.CreerEnvironnement();
 
             //Génération du contenu du jardin (jardin fonctionne ici comme un client de la fabrique abstraite)
             jardin.Generation(nbColonne, nbLigne);
 
-
+            //permet d'afficher la simulation
             genereAffichage();
 
+            //Reporting
             Console.WriteLine(jardin.Statistiques());
-            Console.WriteLine(jardin.Simuler());
+
 
             antWeatherForecast.Etat = "Il fait beau !";
-
-
-
             generation = true;
         }
 

@@ -7,17 +7,23 @@ namespace AntBox
 {
     public class Fourmi : PersonnageAbstrait
 	{
+
         public Fourmi(string unNom, Subject unObservé, int desPointsDeVie=10) : base(unNom, unObservé, desPointsDeVie )
 		{
 		}
 
-		public override void AnalyseSituation()
+
+
+		public override void AnalyseSituation(ZoneAbstraite zoneActuelle)
 		{
-			throw new NotImplementedException();
+            //Cette méthode va permettre d'analyser la situation et changer d'état par la suite
 		}
+
 
 		public override ZoneAbstraite ChoixZoneSuivante(List<AccesAbstrait> accesList, ZoneAbstraite zoneActuelle)
 		{
+            AnalyseSituation(zoneActuelle);
+
             if (accesList.Count <= 0)
                 throw new Exception("Fourmi ne peux pas se décider quand accesList est vide");
 
@@ -31,9 +37,10 @@ namespace AntBox
 
 		public override void Execution()
 		{
-            //TODOvoir si on implémente état ou stratégie... stratégie me semble plus adéquat
-			throw new NotImplementedException();
+            //Cette méthode  sera lancé après le déplacement (utile pour prendre de la nourriture par exemple)
 		}
+
+
 
 		public override string ToString()
 		{

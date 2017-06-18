@@ -48,7 +48,7 @@ namespace AntBox.Environnement
 		public override void RetirerPersonnage(PersonnageAbstrait unPersonnage)
 		{
 			//si le personnage n'est pas déjà sur le terrain, on l'ajoute
-			if (!PersonnageList.Contains(unPersonnage)) {
+			if (PersonnageList.Contains(unPersonnage)) {
 				Console.WriteLine("Je retire un personnage");
 				PersonnageList.Remove(unPersonnage);
 			}

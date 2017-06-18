@@ -17,7 +17,7 @@ namespace AntBox
 
         public abstract ZoneAbstraite ChoixZoneSuivante(List<AccesAbstrait> accesList, ZoneAbstraite zoneActuelle);
 
-        public abstract void AnalyseSituation();
+        public abstract void AnalyseSituation(ZoneAbstraite zoneActuelle);
 
 		public abstract void Execution();
 
