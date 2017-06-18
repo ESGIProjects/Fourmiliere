@@ -22,7 +22,7 @@ namespace AntBox.Factory
 
         public override EnvironnementAbstrait CreerEnvironnement()
 		{
-            return new Jardin();
+            return new Jardin(this);
 		}
 
 
@@ -52,9 +52,9 @@ namespace AntBox.Factory
         }
 
         //création d'un boutDeTerrain
-        public override ZoneAbstraite CreerZone(string nom)
+        public override ZoneAbstraite CreerZone(string nom, int positionX, int positionY)
 		{
-            return new BoutDeTerrain(nom);
+            return new BoutDeTerrain(nom, positionX, positionY);
 		}
 	}
 }

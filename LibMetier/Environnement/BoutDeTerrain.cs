@@ -6,7 +6,7 @@ namespace AntBox.Environnement
 {
 	public class BoutDeTerrain : ZoneAbstraite
 	{
-        public BoutDeTerrain(string unNom) : base(unNom)
+        public BoutDeTerrain(string unNom, int positionX, int positionY) : base(unNom, positionX, positionY)
 		{
 			ObjetList = new List<ObjetAbstrait>();
 			PersonnageList = new List<PersonnageAbstrait>();

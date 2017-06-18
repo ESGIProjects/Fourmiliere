@@ -4,13 +4,25 @@ using AntBox.Factory;
 
 namespace AntBox.Environnement
 {
+    /**
+     * EnvironnementAbstrait représente l'environnement de simulation, mais il agit aussi comme un client d'une abstract factory
+     */
 	public abstract class EnvironnementAbstrait
 	{
+
+        //les éléments composants l'environnement
 		public List<ObjetAbstrait> ObjetList { get; protected set; }
 		public List<AccesAbstrait> AccesList { get; protected set; }
 		public List<ZoneAbstraite> ZoneList { get; protected set; }
+        public FabriqueAbstraite fabriqueAbstraite;
 
-        //TODO comprendre l'intéret de FabriqueAbstraite fabrique ici je ne vois pas
+        //le constructeur
+        public EnvironnementAbstrait(FabriqueAbstraite fabrique)
+        {
+            this.fabriqueAbstraite = fabrique;
+        }
+        
+
 		public abstract void AjouteChemins(/*FabriqueAbstraite fabrique,*/ params AccesAbstrait[] accesArray);
 		public abstract void AjouteObjet (ObjetAbstrait unObjet);
 		public abstract void AjoutePersonnage(PersonnageAbstrait unPersonnage);
@@ -23,6 +35,8 @@ namespace AntBox.Environnement
 
         public abstract string Simuler();
 		public abstract string Statistiques();
+
+        public abstract void Generation(int nbColonne, int nbLigne);
 
 	}
 }

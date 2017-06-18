@@ -44,7 +44,7 @@
     <Compile Include="Environnement\EnvironnementAbstrait.cs" />
     <Compile Include="Environnement\ZoneAbstraite.cs" />
     <Compile Include="Fabrique\FabriqueAbstraite.cs" />
-    <Compile Include="Objets\ObjetAbstrait.cs" />
+    <Compile Include="Observateur\Objets\ObjetAbstrait.cs" />
     <Compile Include="Observateur\Observer.cs" />
     <Compile Include="Observateur\Subject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

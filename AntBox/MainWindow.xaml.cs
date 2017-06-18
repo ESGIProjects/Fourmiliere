@@ -32,7 +32,12 @@ namespace AntBox
         Button run = new Button();
         Button save = new Button();
         Button load = new Button();
+
         Boolean generation = false;
+        Uri uriAnt = new Uri("./Resources/ant.png", UriKind.Relative);
+
+        public static AntWeather antWeatherForecast = AntWeather.SharedAntWeather;
+
         public List<MyRow> ListBoxData { get; set; }
 
         public EnvironnementAbstrait jardin { get; set; }
@@ -131,15 +136,13 @@ namespace AntBox
 
         private void genererClick(object sender, RoutedEventArgs e)
         {
-
             int nbLigne = 0;
             int nbColonne = 0;
 
             CustomDialog cd = new CustomDialog("Veuillez saisir le nombre de colonnes : ", "Veuillez saisir le nombre de lignes :", "");
             cd.ShowDialog();
 
-            if(cd.X.Text == "" || cd.Y.Text == "")
-            {
+            if(cd.X.Text == "" || cd.Y.Text == "") {
                 return;
             }
 
@@ -152,14 +155,12 @@ namespace AntBox
                 MessageBoxButton mbb = MessageBoxButton.YesNo;
                 MessageBoxImage mbi = MessageBoxImage.Warning;
                 MessageBoxResult mbr =  MessageBox.Show(message, titre, mbb, mbi);
-                if(mbr == MessageBoxResult.Yes)
-                {
+                if(mbr == MessageBoxResult.Yes) {
                     Grille.RowDefinitions.Clear();
                     Grille.ColumnDefinitions.Clear();
                     Grille.Children.Clear();
                 }
-                else
-                {
+                else {
                     return;
                 }
             }
@@ -170,96 +171,23 @@ namespace AntBox
             for (int i = 0; i < nbColonne; i++) {
                 Grille.ColumnDefinitions.Add(new ColumnDefinition() {  });
             }
+
             for (int i = 0; i < nbLigne; i++) {
                 Grille.RowDefinitions.Add(new RowDefinition() { });
             }
- 
-            //A partir d'ici on génèrera l'environnement
-            Console.WriteLine("Génération de la fourmilière");
 
+
+            //génération d'une fabrique / abstract factory
             FabriqueFourmiliere fabriqueAbstraiteFourmiliere = new FabriqueFourmiliere();
-            //EnvironnementAbstrait jardin = fabriqueAbstraiteFourmiliere.CreerEnvironnement();
+
+            //création du jardin à partir de la fabrique.
             jardin = fabriqueAbstraiteFourmiliere.CreerEnvironnement();
 
-            //TODO TODO TODO
-            //TODO ajouter le client qui va utiliser la fabriqueAbstraite et faire le code suivant
-            String tempoNom = "";
-            int nbCharColonne = nbColonne.ToString().Length;
-            int nbCharLigne = nbLigne.ToString().Length;
-            ZoneAbstraite zoneDebut;
-            ZoneAbstraite zoneFin;
-            AccesAbstrait acces;
-
-            int nombreZone = 0;
-
-            //génération du jardin
-            for (int y= 1; y <= nbLigne; y++) {
-                for (int x= 1; x <= nbColonne; x++)
-                {
-                    //création du nom de la zone
-                    tempoNom = "zone " +
-                        new string('0', nbCharColonne - x.ToString().Length) + x.ToString() +
-                        "x"+
-                        new string('0', nbCharLigne - y.ToString().Length) + y.ToString();
-
-                    //création de la zone et ajout dans le jardin
-                    jardin.AjouteZoneAbstraites(fabriqueAbstraiteFourmiliere.CreerZone(tempoNom));
-
-                    nombreZone = jardin.ZoneList.Count;
-
-                    //si on a 2 zones ou plus, alors alors la dernière zone à une case voisine à sa gauche
-                    if (nombreZone >= 2) {
-                        zoneDebut   = jardin.ZoneList[nombreZone-2];
-                        zoneFin     = jardin.ZoneList[nombreZone-1];
-                        acces       = fabriqueAbstraiteFourmiliere.CreerAcces(zoneDebut, zoneFin);
-                        
-                        jardin.AjouteChemins(acces);
-                    }
-
-                    //si en soustrayant le nombre max de colonne au nombre de case on a une valeur positive, alors la dernière case à une case voisine au dessus
-                    if ((nombreZone - nbColonne) >= 1) {
-                        zoneDebut = jardin.ZoneList[nombreZone - nbColonne - 1];
-                        zoneFin = jardin.ZoneList[nombreZone  - 1];
-                        acces = fabriqueAbstraiteFourmiliere.CreerAcces(zoneDebut, zoneFin);
-                        jardin.AjouteChemins(acces);
-                    }
-                }
-            }
-
-            //FIN TODO FIN TODO FIN TODO
-            //FIN TODO ajouter le client qui va utiliser la fabriqueAbstraite et faire le code suivant
+            //Génération du contenu du jardin (jardin fonctionne ici comme un client de la fabrique abstraite)
+            jardin.Generation(nbColonne, nbLigne);
 
 
-
-            //TODO TODO TODO TODO
-            //TODO Création et positionnement d'une fourmi
-            Random random  = new Random();
-            Uri uriAnt = new Uri("./Resources/ant.png", UriKind.Relative);
-            AntWeather antWeatherForecast = new AntWeather();
-
-            for (int a = 0; a < 5; a++)
-            {
-                int colX = random.Next(1, nbColonne);
-                int colY = random.Next(1, nbLigne);
-
-                
-
-                var zone = jardin.ZoneList[((colY - 1) * nbColonne + colX - 1)];
-                zone.AjouterPersonnage(fabriqueAbstraiteFourmiliere.CreerPersonnage("Fourmi "+a, antWeatherForecast));
-
-                System.Windows.Controls.Image image = new System.Windows.Controls.Image();
-                image.Source = new BitmapImage(uriAnt);
-                Grille.Children.Add(image);
-                Grid.SetColumn(image, colX);
-                Grid.SetRow(image, colY);
-            }
-            //FIN TODO création et positionnement d'une fourmi
-
-            //TODO elipse
-            drawEllipse(Grille, 0, 0, nbColonne, nbLigne);
-            //TODO fin elipse
-
-            
+            genereAffichage();
 
             Console.WriteLine(jardin.Statistiques());
             Console.WriteLine(jardin.Simuler());
@@ -269,6 +197,33 @@ namespace AntBox
 
 
             generation = true;
+        }
+
+
+        /**
+         * 
+         * 
+         * 
+         */
+        private void genereAffichage ()
+        {
+ 
+           // Grid Grille = new Grid();
+
+            for (int a =0; a < Grille.Children.Count; a++) {
+                Grille.Children.RemoveAt(a);
+            }
+
+            foreach (ZoneAbstraite zone in jardin.ZoneList) {
+                foreach (PersonnageAbstrait personnage in zone.PersonnageList) {
+                    System.Windows.Controls.Image image = new System.Windows.Controls.Image();
+                    image.Source = new BitmapImage(uriAnt);
+                    Grille.Children.Add(image);
+                    Grid.SetColumn(image, zone.positionX);
+                    Grid.SetRow(image, zone.positionY);
+                }
+            }
+
         }
 
         public void drawEllipse(Grid grid, int x, int y, int colSpan = 1, int rowSpan = 1)
