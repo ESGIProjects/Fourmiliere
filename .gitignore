@@ -292,3 +292,5 @@ __pycache__/
 *.dll
 *.cache
 .vs/AntBox/v15/.suo
+*.dll
+*.pdb

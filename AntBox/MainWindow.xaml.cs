@@ -217,8 +217,8 @@ namespace AntBox
                     System.Windows.Controls.Image image = new System.Windows.Controls.Image();
                     image.Source = new BitmapImage(uriAnt);
                     Grille.Children.Add(image);
-                    Grid.SetColumn(image, zone.positionX);
-                    Grid.SetRow(image, zone.positionY);                                                     
+                    Grid.SetColumn(image, zone.positionX-1);
+                    Grid.SetRow(image, zone.positionY-1);                                                     
                 }
             }
             //TODO forcer le raffraichissement
