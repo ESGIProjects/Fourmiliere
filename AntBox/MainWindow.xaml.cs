@@ -59,19 +59,28 @@ namespace AntBox
 
         private void runClick(object sender, RoutedEventArgs e)
         {
-
-
-            Console.WriteLine("\n\n\nBOUCLE SIMULATION\n\n\n");
-            Console.WriteLine(jardin.Simuler());
-            genereAffichage();
+            if (generation)
+            {
+                Console.WriteLine("\n\n\nBOUCLE SIMULATION\n\n\n");
+                Console.WriteLine(jardin.Simuler());
+                genereAffichage();
+            }
+            else
+            {
+                string message = "Veuillez générer une grille avant !";
+                string titre = "Erreur";
+                MessageBoxButton mbb = MessageBoxButton.OK;
+                MessageBoxImage mbi = MessageBoxImage.Error;
+                MessageBox.Show(message, titre, mbb, mbi);
+            }
 
         }
 
         private void saveClick(object sender, RoutedEventArgs e)
         {
             if (!generation) {
-                string message = "Commences une partie avant de vouloir sauvegarder, sale n00b !";
-                string titre = "Alerte aux gogoles";
+                string message = "Veuillez commencer une partie avant !!";
+                string titre = "Erreur";
                 MessageBoxButton mbb = MessageBoxButton.OK;
                 MessageBoxImage mbi = MessageBoxImage.Error;
                 MessageBox.Show(message, titre, mbb, mbi);
