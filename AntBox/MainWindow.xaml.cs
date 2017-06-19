@@ -215,7 +215,7 @@ namespace AntBox
                     image.Source = new BitmapImage(uriAnt);
                     Grille.Children.Add(image);
                     Grid.SetColumn(image, zone.positionX);
-                    Grid.SetRow(image, zone.positionY);
+                    Grid.SetRow(image, zone.positionY);                                                     
                 }
             }
 
