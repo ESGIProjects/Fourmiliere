@@ -20,8 +20,8 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="20*" />
         </Grid.RowDefinitions>
-        
-        
+
+
         <Grid Grid.Row="0" Grid.Column="0" ShowGridLines="True" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -30,7 +30,7 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            
+
             <Button Content="Générer"
                 Width="Auto"
                 Height="Auto"
@@ -66,10 +66,20 @@
         <ListBox Grid.Column="0" Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Auto" ItemsSource="{Binding jardin.ZoneList}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel>
-                        <TextBlock Text="{Binding Nom}" FontSize="14px" FontWeight="Bold" />
-                        <TextBlock Text="{Binding PointDeVie}" FontSize="10px" />
-                    </StackPanel>
+                    <ListBox ItemsSource="{Binding PersonnageList}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel x:Name="fourmiStack">
+                                    <TextBlock Text="{Binding Nom}" FontSize="14px" FontWeight="Bold" />
+                                </StackPanel>
+                                <DataTemplate.Triggers>
+                                    <DataTrigger Binding="{Binding Nom}" Value="{x:Null}">
+                                        <Setter TargetName="fourmiStack" Property="Visibility" Value="Hidden" />
+                                    </DataTrigger>
+                                </DataTemplate.Triggers>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
