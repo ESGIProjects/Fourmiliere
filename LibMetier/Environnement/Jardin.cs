@@ -56,8 +56,10 @@ namespace AntBox.Environnement
 
         public override void DeplacerPersonnage(PersonnageAbstrait unPersonnage, ZoneAbstraite zoneSource, ZoneAbstraite zoneFin)
         {
+          
             zoneSource.RetirerPersonnage(unPersonnage);
             zoneFin.AjouterPersonnage(unPersonnage);
+
         }
 
 
@@ -113,8 +115,8 @@ namespace AntBox.Environnement
 
                     nombreZone = this.ZoneList.Count;
 
-                    //si on a 2 zones ou plus, alors la dernière zone à une case voisine à sa gauche
-                    if (nombreZone >= 2)
+                    //si on a 2 zones ou plus, alors la dernière zone à une case voisine à sa gauche (sauf si la première colonne)
+                    if ((nombreZone >= 2) && (x > 1))
                     {
                         zoneDebut = this.ZoneList[nombreZone - 2];
                         zoneFin = this.ZoneList[nombreZone - 1];
@@ -134,19 +136,16 @@ namespace AntBox.Environnement
                 }
             }
 
-
             //////Génération des fourmis
             for (int a = 0; a < nbFourmiAGenerer; a++)
             {
-                int colX = random.Next(1, nbColonne);
-                int colY = random.Next(1, nbLigne);
+                int colX = random.Next(1, nbColonne+1);
+                int colY = random.Next(1, nbLigne+1);
 
                 var zone = this.ZoneList[((colY - 1) * nbColonne + colX - 1)];
 
                 zone.AjouterPersonnage(this.fabriqueAbstraite.CreerPersonnage("Fourmi " + a, AntWeather.SharedAntWeather ));
             }
-
-
         }
 
         /**
@@ -163,19 +162,35 @@ namespace AntBox.Environnement
             {
                 for (int a =0; a < zone.PersonnageList.Count; a++)
                 {
-                     
                     personageEnCours = zone.PersonnageList[a];
 
-                    if (!personnageAyantDejaBouge.Contains(personageEnCours)) { 
-
+                    if (!personnageAyantDejaBouge.Contains(personageEnCours)) {
+                        simulation += "\n" + personageEnCours.Nom + " n'a pas encore bougée";
                         zoneSelectionne = personageEnCours.ChoixZoneSuivante(zone.AccesList, zone);
-                        simulation += "\n" + personageEnCours.Nom + " souhaite se rendre sur : " + zoneSelectionne.Nom;
 
-                        this.DeplacerPersonnage(personageEnCours, zone, zoneSelectionne);
-                        simulation += "\n" + personageEnCours.Nom + " vient de se déplacer";
+                        if (zoneSelectionne != null)
+                        {
+                            simulation += "\n" + personageEnCours.Nom + " souhaite se rendre sur : " + zoneSelectionne.Nom;
 
-                        personageEnCours.Execution();
-                        personnageAyantDejaBouge.Add(personageEnCours);
+                            //simulation += "\n debut : \n" + zone;
+                            //simulation += "\n fin : \n" + zoneSelectionne;
+
+                            this.DeplacerPersonnage(personageEnCours, zone, zoneSelectionne);
+                            simulation += "\n" + personageEnCours.Nom + " vient de se déplacer";
+
+                            //simulation += "\n debut : \n" + zone;
+                            //simulation += "\n fin : \n" + zoneSelectionne;
+
+
+
+                            personageEnCours.Execution();
+                            personnageAyantDejaBouge.Add(personageEnCours);
+                        } else
+                        {
+                            simulation += "\n" + personageEnCours.Nom + " n'a pas trouvé de zone sur laquelle se déplacer";
+                        }
+                    } else {
+                        simulation += "\n" + personageEnCours.Nom + " a déjà bougée";
                     }
                 }
             }

@@ -23,17 +23,42 @@ namespace AntBox
 		public override ZoneAbstraite ChoixZoneSuivante(List<AccesAbstrait> accesList, ZoneAbstraite zoneActuelle)
 		{
             AnalyseSituation(zoneActuelle);
+            List<AccesAbstrait> accesListDisponible = new List<AccesAbstrait>();
+            AccesAbstrait accesSuivant;
+            ZoneAbstraite zoneSuivante = null;
+            Random random = new Random();
+
+            //pour éviter de se déplacer dans une zone avec une Fourmi copie la liste passée en paramêtre
+            foreach (AccesAbstrait acces  in accesList) {
+                accesListDisponible.Add(acces);
+            }
 
             if (accesList.Count <= 0)
                 throw new Exception("Fourmi ne peux pas se décider quand accesList est vide");
 
-            AccesAbstrait accesSuivant;
-            Random random = new Random();
+            while (accesListDisponible.Count > 0)
+            {
+                accesSuivant = accesList[random.Next(0, accesListDisponible.Count)];
 
-            accesSuivant = accesList[random.Next(1, accesList.Count)-1];
+                if (accesSuivant.ZoneDebut == zoneActuelle) {
+                    zoneSuivante = accesSuivant.ZoneFin;
+                } else
+                {
+                    zoneSuivante = accesSuivant.ZoneDebut;
+                }
+                if (zoneSuivante.PersonnageList.Count > 0)
+                {
+                    accesListDisponible.Remove(accesSuivant);
+                    zoneSuivante = null;
+                } else
+                {
+                    accesListDisponible.Clear();
+                }
+            }
 
-            return (accesSuivant.ZoneDebut == zoneActuelle) ? accesSuivant.ZoneFin : accesSuivant.ZoneDebut;
-		}
+            return zoneSuivante;
+
+        }
 
 		public override void Execution()
 		{

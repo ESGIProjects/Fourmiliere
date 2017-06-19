@@ -188,7 +188,6 @@ namespace AntBox
             FabriqueFourmiliere fabriqueAbstraiteFourmiliere = new FabriqueFourmiliere();
             jardin = fabriqueAbstraiteFourmiliere.CreerEnvironnement();                     //création du jardin à partir de la fabrique.
 
-
             //Génération du contenu du jardin (jardin fonctionne ici comme un client de la fabrique abstraite)
             jardin.Generation(nbColonne, nbLigne);
 
@@ -205,15 +204,10 @@ namespace AntBox
 
 
         /**
-         * 
-         * 
-         * 
+         * Méthode permettant de raffraichir les positions des fourmis
          */
         private void genereAffichage ()
         {
- 
-           // Grid Grille = new Grid();
-
             for (int a =0; a < Grille.Children.Count; a++) {
                 Grille.Children.RemoveAt(a);
             }
@@ -227,7 +221,7 @@ namespace AntBox
                     Grid.SetRow(image, zone.positionY);
                 }
             }
-
+            //TODO forcer le raffraichissement
         }
 
         public void drawEllipse(Grid grid, int x, int y, int colSpan = 1, int rowSpan = 1)
