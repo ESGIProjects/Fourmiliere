@@ -208,20 +208,21 @@ namespace AntBox
          */
         private void genereAffichage ()
         {
-            for (int a =0; a < Grille.Children.Count; a++) {
-                Grille.Children.RemoveAt(a);
-            }
+            Grille.Children.Clear();
 
-            foreach (ZoneAbstraite zone in jardin.ZoneList) {
-                foreach (PersonnageAbstrait personnage in zone.PersonnageList) {
+
+
+            foreach (ZoneAbstraite zone in jardin.ZoneList)
+            {
+                foreach (PersonnageAbstrait personnage in zone.PersonnageList)
+                {
                     System.Windows.Controls.Image image = new System.Windows.Controls.Image();
                     image.Source = new BitmapImage(uriAnt);
                     Grille.Children.Add(image);
-                    Grid.SetColumn(image, zone.positionX-1);
-                    Grid.SetRow(image, zone.positionY-1);                                                     
+                    Grid.SetColumn(image, zone.positionX - 1);
+                    Grid.SetRow(image, zone.positionY - 1);
                 }
             }
-            //TODO forcer le raffraichissement
         }
 
         public void drawEllipse(Grid grid, int x, int y, int colSpan = 1, int rowSpan = 1)
