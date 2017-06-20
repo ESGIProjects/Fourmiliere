@@ -10,6 +10,8 @@ using System.Windows.Shapes;
 using System.Windows.Media.Imaging;
 using System.Collections.Generic;
 using System.Collections;
+using System.Windows.Threading;
+using System.Threading.Tasks;
 
 namespace AntBox
 { 
@@ -56,14 +58,24 @@ namespace AntBox
 
             DataContext = this;
         }
-
-        private void runClick(object sender, RoutedEventArgs e)
+        async Task PutTaskDelay()
         {
+            Console.WriteLine("\n\n\nBOUCLE SIMULATION\n\n\n");
+            Console.WriteLine(jardin.Simuler());
+            genereAffichage();
+            await Task.Delay(1000);
+        }
+
+        private async void runClick(object sender, RoutedEventArgs e)
+        {
+
+            
             if (generation)
             {
-                Console.WriteLine("\n\n\nBOUCLE SIMULATION\n\n\n");
-                Console.WriteLine(jardin.Simuler());
-                genereAffichage();
+                while (true)
+                {
+                    await PutTaskDelay();
+                }
             }
             else
             {
@@ -72,6 +84,7 @@ namespace AntBox
                 MessageBoxButton mbb = MessageBoxButton.OK;
                 MessageBoxImage mbi = MessageBoxImage.Error;
                 MessageBox.Show(message, titre, mbb, mbi);
+
             }
 
         }
@@ -209,8 +222,6 @@ namespace AntBox
         private void genereAffichage ()
         {
             Grille.Children.Clear();
-
-
 
             foreach (ZoneAbstraite zone in jardin.ZoneList)
             {

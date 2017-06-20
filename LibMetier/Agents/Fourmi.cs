@@ -36,9 +36,16 @@ namespace AntBox
             if (accesList.Count <= 0)
                 throw new Exception("Fourmi ne peux pas se décider quand accesList est vide");
 
+            
+
             while (accesListDisponible.Count > 0)
             {
-                accesSuivant = accesList[random.Next(0, accesListDisponible.Count)];
+                Console.WriteLine(zoneActuelle.Nom +" nb accès disponible " + accesListDisponible.Count);
+
+                int tempo = random.Next(0, accesListDisponible.Count);
+                Console.WriteLine("random : " + tempo);
+
+                accesSuivant = accesList[tempo];
 
                 if (accesSuivant.ZoneDebut == zoneActuelle) {
                     zoneSuivante = accesSuivant.ZoneFin;
@@ -46,13 +53,18 @@ namespace AntBox
                 {
                     zoneSuivante = accesSuivant.ZoneDebut;
                 }
+
                 if (zoneSuivante.PersonnageList.Count > 0)
                 {
-                    accesListDisponible.Remove(accesSuivant);
+                    Console.WriteLine(">0");
+                    accesListDisponible.RemoveAt(tempo);
+
                     zoneSuivante = null;
                 } else
                 {
+                    Console.WriteLine("<=0");
                     accesListDisponible.Clear();
+                    Console.WriteLine(accesListDisponible.Count);
                 }
             }
 
