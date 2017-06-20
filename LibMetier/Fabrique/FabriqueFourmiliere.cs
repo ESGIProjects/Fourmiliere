@@ -1,6 +1,7 @@
 ﻿using System;
 using AntBox.Environnement;
 using AntBox.Observateur;
+using AntBox.Etat;
 
 namespace AntBox.Factory
 {
@@ -40,15 +41,15 @@ namespace AntBox.Factory
 		}
 
         //création d'une fourmi avec point de vie par défaut 
-        public override PersonnageAbstrait CreerPersonnage(string nom, Subject unObservé)
+        public override PersonnageAbstrait CreerPersonnage(string nom, Subject unObservé, EtatPersonnageAbstrait etat)
 		{
-            return new Fourmi(nom, unObservé);
+            return new Fourmi(nom, unObservé, etat);
         }
 
         //création d'une fourmi sans points de vie par défaut
-        public override PersonnageAbstrait CreerPersonnage(string nom, Subject unObservé, int desPointsDeVie)
+        public override PersonnageAbstrait CreerPersonnage(string nom, Subject unObservé)
         {
-            return new Fourmi(nom, unObservé, desPointsDeVie);
+            return new Fourmi(nom, unObservé, new EtatFourmiAleatoire());
         }
 
         //création d'un boutDeTerrain

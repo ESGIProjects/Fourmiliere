@@ -1,6 +1,7 @@
 ﻿using System;
 using AntBox.Environnement;
 using AntBox.Observateur;
+using AntBox.Etat;
 
 namespace AntBox.Factory
 {
@@ -12,7 +13,7 @@ namespace AntBox.Factory
 		public abstract EnvironnementAbstrait CreerEnvironnement();
 		public abstract ObjetAbstrait CreerObjet(string nom);
         public abstract PersonnageAbstrait CreerPersonnage(string nom, Subject unObservé);
-        public abstract PersonnageAbstrait CreerPersonnage(string nom, Subject unObservé, int desPointsDeVie);
+        public abstract PersonnageAbstrait CreerPersonnage(string nom, Subject unObservé, EtatPersonnageAbstrait etat);
         public abstract ZoneAbstraite CreerZone(string nom, int positionX, int positionY);
 
 

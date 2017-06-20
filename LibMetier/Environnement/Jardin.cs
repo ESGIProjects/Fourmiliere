@@ -166,21 +166,16 @@ namespace AntBox.Environnement
 
                     if (!personnageAyantDejaBouge.Contains(personageEnCours)) {
                         simulation += "\n" + personageEnCours.Nom + " (sur "+zone.Nom+") n'a pas encore bougée";
+
+                        personageEnCours.AnalyseSituation();
+
                         zoneSelectionne = personageEnCours.ChoixZoneSuivante(zone.AccesList, zone);
 
                         if (zoneSelectionne != null)
                         {
                             simulation += "\n" + personageEnCours.Nom + " souhaite se rendre sur : " + zoneSelectionne.Nom;
-
-                            //simulation += "\n debut : \n" + zone;
-                            //simulation += "\n fin : \n" + zoneSelectionne;
-
                             this.DeplacerPersonnage(personageEnCours, zone, zoneSelectionne);
                             simulation += "\n" + personageEnCours.Nom + " vient de se déplacer sur "+ zoneSelectionne.Nom;
-
-                            //simulation += "\n debut : \n" + zone;
-                            //simulation += "\n fin : \n" + zoneSelectionne;
-
 
 
                             personageEnCours.Execution();
