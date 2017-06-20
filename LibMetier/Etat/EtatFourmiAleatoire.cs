@@ -11,6 +11,29 @@ namespace AntBox.Etat
     {
         public override void AnalyseSituation(PersonnageAbstrait personnage)
         {
+            Console.WriteLine("Je me trouve sur la zone : " + personnage.ZoneActuelle);
+
+            foreach (ObjetAbstrait objet in personnage.ZoneActuelle.ObjetList)
+            {
+
+                if (objet is Nourriture)
+                {
+                    Console.WriteLine("IL Y A DE LA BOUFFE OU JE SUIS ! ! ! ! ! ! ! ");
+
+                    //TODO changer d'ETAT
+                    //TODO changer d'état 
+                    //TODO changer d'ETAT
+                    //TODO changer d'état 
+                    //TODO changer d'ETAT
+                    //TODO changer d'état 
+                    //TODO changer d'ETAT
+                    //TODO changer d'ETAT
+                    //TODO changer d'état 
+                    //TODO changer d'état 
+
+                }
+            }
+
             Console.WriteLine("Je viens d'analyser la situation");
         }
 

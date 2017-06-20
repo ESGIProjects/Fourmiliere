@@ -81,9 +81,13 @@ namespace AntBox.Environnement
             //nom temporaire d'une des zones 
             String tempoNom = "";
 
-            //nombre de fourmi
-            int nbFourmiAGenerer = ((nbColonne * nbLigne) / 10);
-            
+            //nombre de fourmi et de nourriture
+            int nbFourmiAGenerer        = ((nbColonne * nbLigne) / 10);
+            int nbNourritureAGenerer    = ((nbColonne * nbLigne) / 20);
+
+            nbFourmiAGenerer        = (nbFourmiAGenerer != 0) ? nbFourmiAGenerer : 1;
+            nbNourritureAGenerer    = (nbNourritureAGenerer != 0) ? nbNourritureAGenerer : 1;
+
             //nécessaire pour la génération aléatoire des fourmis
             Random random = new Random();
 
@@ -146,8 +150,21 @@ namespace AntBox.Environnement
 
                 zone.AjouterPersonnage(this.fabriqueAbstraite.CreerPersonnage("Fourmi " + a, AntWeather.SharedAntWeather ));
             }
+
+            //////Génération de la nourriture
+            Console.WriteLine("Nourriture : " + nbNourritureAGenerer);
+            for (int a = 0; a < nbNourritureAGenerer; a++)
+            {
+                int colX = random.Next(1, nbColonne + 1);
+                int colY = random.Next(1, nbLigne + 1);
+
+                var zone = this.ZoneList[((colY - 1) * nbColonne + colX - 1)];
+
+                zone.AjouterObjet(this.fabriqueAbstraite.CreerObjet(FabriqueFourmiliere.TypeObjetNourriture));
+            }
         }
 
+        
         /**
          * 
          */

@@ -37,6 +37,7 @@ namespace AntBox
 
         Boolean generation = false;
         Uri uriAnt = new Uri("./Resources/ant.png", UriKind.Relative);
+        Uri uriCupcake = new Uri("./Resources/cupcake.png", UriKind.Relative);
 
         public static AntWeather antWeatherForecast = AntWeather.SharedAntWeather;
 
@@ -232,6 +233,17 @@ namespace AntBox
                     Grille.Children.Add(image);
                     Grid.SetColumn(image, zone.positionX - 1);
                     Grid.SetRow(image, zone.positionY - 1);
+                }
+                foreach (ObjetAbstrait objet in zone.ObjetList)
+                {
+
+                    if (objet is Nourriture) { 
+                        System.Windows.Controls.Image imageNourriture = new System.Windows.Controls.Image();
+                        imageNourriture.Source = new BitmapImage(uriCupcake);
+                        Grille.Children.Add(imageNourriture);
+                        Grid.SetColumn(imageNourriture, zone.positionX - 1);
+                        Grid.SetRow(imageNourriture, zone.positionY - 1);
+                    }
                 }
             }
         }

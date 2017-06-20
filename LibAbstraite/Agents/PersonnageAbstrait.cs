@@ -14,9 +14,6 @@ namespace AntBox
         protected EtatPersonnageAbstrait Etat;
         public ZoneAbstraite ZoneActuelle { get; set; }
 
-        public ZoneAbstraite Position { get; protected set; }
-
-
         public virtual void AnalyseSituation()
         {
             Etat.AnalyseSituation(this);

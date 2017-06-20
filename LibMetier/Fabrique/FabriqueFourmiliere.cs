@@ -7,9 +7,9 @@ namespace AntBox.Factory
 {
 	public class FabriqueFourmiliere : FabriqueAbstraite
 	{
-        const string TypeObjetNourriture = "nourriture";
-        const string TypeObjetOeuf       = "oeuf";
-        const string TypeObjetPheromone  = "pheromone";
+        public const string TypeObjetNourriture = "nourriture";
+        public const string TypeObjetOeuf       = "oeuf";
+        public const string TypeObjetPheromone  = "pheromone";
 
         public FabriqueFourmiliere()
 		{
