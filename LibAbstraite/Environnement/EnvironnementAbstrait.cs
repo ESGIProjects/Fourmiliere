@@ -14,6 +14,7 @@ namespace AntBox.Environnement
 		public List<ObjetAbstrait> ObjetList { get; protected set; }
 		public List<AccesAbstrait> AccesList { get; protected set; }
 		public List<ZoneAbstraite> ZoneList { get; protected set; }
+        public List<PersonnageAbstrait> PersonnageList { get; protected set; }
         public FabriqueAbstraite fabriqueAbstraite;
 
         //le constructeur

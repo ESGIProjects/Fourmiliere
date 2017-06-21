@@ -16,27 +16,28 @@ namespace AntBox.Environnement
             ObjetList = new List<ObjetAbstrait>();
             AccesList = new List<AccesAbstrait>();
             ZoneList = new List<ZoneAbstraite>();
+            PersonnageList = new List<PersonnageAbstrait>();
          }
 
         public override void AjouteChemins(/*FabriqueAbstraite fabrique, */params AccesAbstrait[] accesArray)
         {
-            AccesList.AddRange(accesArray);
+            this.AccesList.AddRange(accesArray);
         }
 
         public override void AjouteObjet(ObjetAbstrait unObjet)
         {
-            ObjetList.Add(unObjet);
+            this.ObjetList.Add(unObjet);
             //TODO peut être positionner cet objet sur une zone ?
         }
 
         public override void AjoutePersonnage(PersonnageAbstrait unPersonnage)
         {
-            throw new NotImplementedException();
+            this.PersonnageList.Add(unPersonnage);
         }
 
         public override void AjouteZoneAbstraites(params ZoneAbstraite[] zoneAbstraitesArray)
         {
-            ZoneList.AddRange(zoneAbstraitesArray);
+            this.ZoneList.AddRange(zoneAbstraitesArray);
         }
 
         public override void ChargerEnvironnement(FabriqueAbstraite fabrique)
@@ -146,9 +147,12 @@ namespace AntBox.Environnement
                 int colX = random.Next(1, nbColonne+1);
                 int colY = random.Next(1, nbLigne+1);
 
-                var zone = this.ZoneList[((colY - 1) * nbColonne + colX - 1)];
+                var zone        = this.ZoneList[((colY - 1) * nbColonne + colX - 1)];
+                var personnage = this.fabriqueAbstraite.CreerPersonnage("Fourmi " + a, AntWeather.SharedAntWeather);
 
-                zone.AjouterPersonnage(this.fabriqueAbstraite.CreerPersonnage("Fourmi " + a, AntWeather.SharedAntWeather ));
+                zone.AjouterPersonnage(personnage); //ajout du personnage sur une zone
+                this.AjoutePersonnage(personnage);  //ajout du personnage dans le jardin pour faciliter le binding
+
             }
 
             //////Génération de la nourriture
@@ -158,9 +162,11 @@ namespace AntBox.Environnement
                 int colX = random.Next(1, nbColonne + 1);
                 int colY = random.Next(1, nbLigne + 1);
 
-                var zone = this.ZoneList[((colY - 1) * nbColonne + colX - 1)];
+                var zone        = this.ZoneList[((colY - 1) * nbColonne + colX - 1)];
+                var nourriture  = this.fabriqueAbstraite.CreerObjet(FabriqueFourmiliere.TypeObjetNourriture);
 
-                zone.AjouterObjet(this.fabriqueAbstraite.CreerObjet(FabriqueFourmiliere.TypeObjetNourriture));
+                zone.AjouterObjet(nourriture);  //ajouter de la nourriture sur la zone
+                this.AjouteObjet(nourriture);   //ajout de l'objet dans le jardin pour faciliter le binding
             }
         }
 
