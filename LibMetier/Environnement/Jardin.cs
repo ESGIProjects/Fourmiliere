@@ -96,6 +96,10 @@ namespace AntBox.Environnement
             int nbCharColonne = nbColonne.ToString().Length;
             int nbCharLigne = nbLigne.ToString().Length;
 
+            //détermination de l'emplacement de la fourmilière
+            int positionXFourmiliere = (nbColonne%2 == 0)? (nbColonne / 2) : ((nbColonne / 2) +1);
+            int positionYFourmiliere = (nbLigne % 2 == 0) ? (nbLigne / 2) : ((nbLigne / 2) + 1);
+
             //les objets temporaires
             ZoneAbstraite zoneDebut;
             ZoneAbstraite zoneFin;
@@ -105,18 +109,23 @@ namespace AntBox.Environnement
             int nombreZone = 0;
 
             //////génération du jardin
+
+
             for (int y = 1; y <= nbLigne; y++)
             {
                 for (int x = 1; x <= nbColonne; x++)
                 {
                     //création du nom de la zone
-                    tempoNom = "zone " +
-                        new string('0', nbCharColonne - x.ToString().Length) + x.ToString() +
-                        "x" +
-                        new string('0', nbCharLigne - y.ToString().Length) + y.ToString();
+                    tempoNom =  new string('0', nbCharColonne - x.ToString().Length) + x.ToString() + "x" +  new string('0', nbCharLigne - y.ToString().Length) + y.ToString();
 
                     //création de la zone et ajout dans le jardin
-                    this.AjouteZoneAbstraites(this.fabriqueAbstraite.CreerZone(tempoNom, x, y));
+                    if ((x ==  positionXFourmiliere) && (y == positionYFourmiliere))
+                    {
+                        this.AjouteZoneAbstraites(this.fabriqueAbstraite.CreerZoneSpeciale("Fourmiliere "+tempoNom, x, y));
+                    } else  {
+                        this.AjouteZoneAbstraites(this.fabriqueAbstraite.CreerZone("Zone " + tempoNom, x, y));
+                    }
+                    
 
                     nombreZone = this.ZoneList.Count;
 

@@ -226,6 +226,14 @@ namespace AntBox
 
             foreach (ZoneAbstraite zone in jardin.ZoneList)
             {
+                //TODO AJOUTER un affichage spécial pour la fourmilière
+                //TODO AJOUTER un affichage spécial pour la fourmilière
+                //TODO AJOUTER un affichage spécial pour la fourmilière
+                //TODO AJOUTER un affichage spécial pour la fourmilière
+                //TODO AJOUTER un affichage spécial pour la fourmilière
+                //TODO AJOUTER un affichage spécial pour la fourmilière
+                //TODO AJOUTER un affichage spécial pour la fourmilière
+
                 foreach (PersonnageAbstrait personnage in zone.PersonnageList)
                 {
                     System.Windows.Controls.Image image = new System.Windows.Controls.Image();

@@ -25,11 +25,7 @@ namespace AntBox.Environnement
 		{
 			//si l'objet n'est pas déjà sur le terrain, on l'ajoute
 			if (!ObjetList.Contains(unObjet)) {
-				//Console.WriteLine("J'ajoute un objet");
 				ObjetList.Add(unObjet);
-			}
-			else {
-				//Console.WriteLine("impossible d'ajouter l'accès");
 			}
 		}
 
@@ -37,12 +33,8 @@ namespace AntBox.Environnement
 		{
 			//si le personnage n'est pas déjà sur le terrain, on l'ajoute
 			if (!PersonnageList.Contains(unPersonnage)) {
-				//Console.WriteLine("J'ajoute un personnage");
 				PersonnageList.Add(unPersonnage);
                 unPersonnage.ZoneActuelle = this;
-			}
-			else {
-				//Console.WriteLine("impossible d'ajouter ce personnage");
 			}
 		}
 
@@ -50,12 +42,8 @@ namespace AntBox.Environnement
 		{
 			//si le personnage n'est pas déjà sur le terrain, on l'ajoute
 			if (PersonnageList.Contains(unPersonnage)) {
-                //Console.WriteLine("Je retire un personnage");
                 unPersonnage.ZoneActuelle = null;
                 PersonnageList.Remove(unPersonnage);
-			}
-			else {
-				//Console.WriteLine("impossible de retirer ce personnage");
 			}
 		}
 	}

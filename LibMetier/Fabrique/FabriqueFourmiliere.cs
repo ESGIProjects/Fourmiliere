@@ -57,5 +57,10 @@ namespace AntBox.Factory
 		{
             return new BoutDeTerrain(nom, positionX, positionY);
 		}
-	}
+
+        public override ZoneAbstraite CreerZoneSpeciale(string nom, int positionX, int positionY)
+        {
+            return new Fourmiliere(nom, positionX, positionY);
+        }
+    }
 }
