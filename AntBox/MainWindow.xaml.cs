@@ -41,6 +41,7 @@ namespace AntBox
         Uri uriCupcake = new Uri("./Resources/food.png", UriKind.Relative);
         Uri uriAntFood = new Uri("./Resources/ant_with_food.png", UriKind.Relative);
         Uri uriAnthill = new Uri("./Resources/anthill.png", UriKind.Relative);
+        Uri uriSugar = new Uri("./Resources/sugar.png", UriKind.Relative);
 
         public static AntWeather antWeatherForecast = AntWeather.SharedAntWeather;
 
@@ -268,12 +269,23 @@ namespace AntBox
                     Grid.SetColumn(image, zone.positionX - 1);
                     Grid.SetRow(image, zone.positionY - 1);
                 }
+
                 //affichage des objets
-                foreach (ObjetAbstrait objet in zone.ObjetList)
-                {
+                foreach (ObjetAbstrait objet in zone.ObjetList) {
                     if (objet is Nourriture) { 
                         System.Windows.Controls.Image imageNourriture = new System.Windows.Controls.Image();
                         imageNourriture.Source = new BitmapImage(uriCupcake);
+                        Grille.Children.Add(imageNourriture);
+                        Grid.SetColumn(imageNourriture, zone.positionX - 1);
+                        Grid.SetRow(imageNourriture, zone.positionY - 1);
+                    } else if (objet is Pheromone)
+                    {
+                        System.Windows.Controls.Image imageNourriture = new System.Windows.Controls.Image();
+                        imageNourriture.Source = new BitmapImage(uriSugar);
+
+                        Console.WriteLine("Opacity : " + (Double) objet.HP / (Double) objet.HPMax);
+                        imageNourriture.Opacity = ((Double) objet.HP / (Double) objet.HPMax);
+
                         Grille.Children.Add(imageNourriture);
                         Grid.SetColumn(imageNourriture, zone.positionX - 1);
                         Grid.SetRow(imageNourriture, zone.positionY - 1);

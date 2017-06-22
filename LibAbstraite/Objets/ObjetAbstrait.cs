@@ -6,7 +6,12 @@ namespace AntBox
 	{
 		public ZoneAbstraite Position { get; protected set; }
 		public string Nom { get; protected set; }
+        public int HPMax { get; protected set; } = 30;
+        public int HP { get; protected set; } = 30;
 
-		public abstract void MiseAJour();
+        public virtual void MiseAJour()
+        {
+            this.HP--;
+        }
 	}
 }

@@ -5,11 +5,8 @@ namespace AntBox
 	{
 		public Pheromone()
 		{
-		}
-
-		public override void MiseAJour()
-		{
-			throw new NotImplementedException();
+            this.HPMax = 5;
+            this.HP = 5;
 		}
 	}
 }

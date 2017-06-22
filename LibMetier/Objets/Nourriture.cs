@@ -6,10 +6,5 @@ namespace AntBox
 		public Nourriture()
 		{
 		}
-
-		public override void MiseAJour()
-		{
-			throw new NotImplementedException();
-		}
 	}
 }

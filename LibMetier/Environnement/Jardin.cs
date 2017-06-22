@@ -7,6 +7,8 @@ using AntBox.Factory;
 using AntBox;
 using AntBox.Observateur;
 using System.Collections.ObjectModel;
+using AntBox.Etat;
+
 
 namespace AntBox.Environnement
 {
@@ -190,26 +192,41 @@ namespace AntBox.Environnement
             String simulation = "";
             PersonnageAbstrait personageEnCours;
             List<PersonnageAbstrait> personnageAyantDejaBouge = new List<PersonnageAbstrait>();
+            List<ObjetAbstrait> objetARetirer = new List<ObjetAbstrait>();
 
-            foreach (ZoneAbstraite zone in ZoneList)
-            {
-                for (int a =0; a < zone.PersonnageList.Count; a++)
+            foreach (ZoneAbstraite zone in ZoneList) {
+                for (int a = 0; a < zone.ObjetList.Count; a++) {
+                    zone.ObjetList[a].MiseAJour();
+                    if (zone.ObjetList[a].HP <= 0) {
+                        objetARetirer.Add(zone.ObjetList[a]);
+                    }
+                }
+                for (int a = 0; a < objetARetirer.Count; a++)
                 {
+                    zone.ObjetList.Remove(objetARetirer[a]);
+                }
+                objetARetirer.Clear();
+
+                for (int a =0; a < zone.PersonnageList.Count; a++) {
                     personageEnCours = zone.PersonnageList[a];
 
                     if (!personnageAyantDejaBouge.Contains(personageEnCours)) {
                         simulation += "\n" + personageEnCours.Nom + " (sur "+zone.Nom+") n'a pas encore bougée";
 
+                        if (personageEnCours.Etat is EtatFourmiFoundFood) {
+                            Console.WriteLine("La fourmi " + personageEnCours.Nom + " dépose une phéromone");
+
+                            zone.ObjetList.Add(this.fabriqueAbstraite.CreerObjet(FabriqueFourmiliere.TypeObjetPheromone));
+                        }
+
                         personageEnCours.AnalyseSituation();
 
                         zoneSelectionne = personageEnCours.ChoixZoneSuivante(zone.AccesList, zone);
 
-                        if (zoneSelectionne != null)
-                        {
+                        if (zoneSelectionne != null) {
                             simulation += "\n" + personageEnCours.Nom + " souhaite se rendre sur : " + zoneSelectionne.Nom;
                             this.DeplacerPersonnage(personageEnCours, zone, zoneSelectionne);
                             simulation += "\n" + personageEnCours.Nom + " vient de se déplacer sur "+ zoneSelectionne.Nom;
-
 
                             personageEnCours.Execution();
                             personnageAyantDejaBouge.Add(personageEnCours);

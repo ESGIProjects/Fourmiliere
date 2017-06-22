@@ -135,5 +135,8 @@
     <Resource Include="Resources\ant_next.png" />
     <Resource Include="Resources\food.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\sugar.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
