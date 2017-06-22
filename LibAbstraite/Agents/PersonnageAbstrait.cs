@@ -11,7 +11,7 @@ namespace AntBox
     {
 		public string Nom { get; protected set; }
         public Subject Observe { get; protected set; }
-        protected EtatPersonnageAbstrait Etat;
+        public EtatPersonnageAbstrait Etat { get;  set; }
         public ZoneAbstraite ZoneActuelle { get; set; }
         public ZoneAbstraite maison { get; protected set; }
 

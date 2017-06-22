@@ -59,7 +59,7 @@
                 Width="Auto"
                 Height="Auto"
                 Grid.Column="4"
-                Click="rainClick"
+                Click="loadClick"
             />
         </Grid>
 

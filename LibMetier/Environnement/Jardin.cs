@@ -218,6 +218,7 @@ namespace AntBox.Environnement
                             personnageAyantDejaBouge.Add(personageEnCours);
                         } else
                         {
+                            personageEnCours.Execution();
                             simulation += "\n" + personageEnCours.Nom + " n'a pas trouvé de zone sur laquelle se déplacer";
                         }
                     } else {

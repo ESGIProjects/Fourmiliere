@@ -9,18 +9,13 @@ namespace AntBox.Etat
 {
     class EtatFourmiAleatoire : EtatPersonnageAbstrait
     {
-        protected List<ZoneAbstraite> ZonesPrecedentes = new List<ZoneAbstraite>();
+        protected Queue<ZoneAbstraite> ZonesPrecedentes = new Queue<ZoneAbstraite>();
         protected ZoneAbstraite ZoneSuivante = null;
 
         public override void AnalyseSituation(PersonnageAbstrait personnage)
         {
             Console.WriteLine("Je me trouve sur la zone : " + personnage.ZoneActuelle);
-
-
-           foreach(ZoneAbstraite z in  ZonesPrecedentes)
-            {
-                Console.WriteLine(z.Nom + " déjà parcouru");
-            }
+            Boolean found = false;
 
             foreach (ObjetAbstrait objet in personnage.ZoneActuelle.ObjetList)
             {
@@ -28,18 +23,7 @@ namespace AntBox.Etat
                 if (objet is Nourriture)
                 {
                     Console.WriteLine("IL Y A DE LA BOUFFE OU JE SUIS ! ! ! ! ! ! ! ");
-
-                    //TODO changer d'ETAT
-                    //TODO changer d'état 
-                    //TODO changer d'ETAT
-                    //TODO changer d'état 
-                    //TODO changer d'ETAT
-                    //TODO changer d'état 
-                    //TODO changer d'ETAT
-                    //TODO changer d'ETAT
-                    //TODO changer d'état 
-                    //TODO changer d'état 
-
+                    found = true;
                 }
             }
 
@@ -60,7 +44,7 @@ namespace AntBox.Etat
             if (!ZonesPrecedentes.Contains(zoneActuelle))
             {
                 Console.WriteLine(zoneActuelle.Nom + " Ajouté dans ma fourmis");
-                ZonesPrecedentes.Add(zoneActuelle);
+                ZonesPrecedentes.Enqueue(zoneActuelle);
             }
 
             foreach (AccesAbstrait acces in accesList)
@@ -113,12 +97,12 @@ namespace AntBox.Etat
 
         public override void Execution()
         {
-            this.ZonesPrecedentes.Add(ZoneSuivante);
+            this.ZonesPrecedentes.Enqueue(ZoneSuivante);
             ZoneSuivante = null;
             //pour éviter de bloquer une fourmis trop longtemps, pour une
             if (ZonesPrecedentes.Count > 5)
             {
-                ZonesPrecedentes.RemoveAt(0);
+                ZonesPrecedentes.Dequeue();
             }
 
             Console.WriteLine("execution");
