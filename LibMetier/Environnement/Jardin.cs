@@ -107,9 +107,6 @@ namespace AntBox.Environnement
             ZoneAbstraite zoneFin;
             AccesAbstrait acces;
 
-            //la fourmilière
-            ZoneAbstraite fourmiliere = null;
-
             //compteur du nombre de zone (nécessaire quand on génère nos cases)
             int nombreZone = 0;
 
@@ -124,8 +121,8 @@ namespace AntBox.Environnement
                     //création de la zone et ajout dans le jardin
                     if ((x ==  positionXFourmiliere) && (y == positionYFourmiliere))
                     {
-                        fourmiliere = this.fabriqueAbstraite.CreerZoneSpeciale("Fourmiliere " + tempoNom, x, y);
-                        this.AjouteZoneAbstraites(fourmiliere);
+                        Fourmiliere = this.fabriqueAbstraite.CreerZone("Fourmiliere " + tempoNom, x, y);
+                        this.AjouteZoneAbstraites(Fourmiliere);
                     } else  {
                         this.AjouteZoneAbstraites(this.fabriqueAbstraite.CreerZone("Zone " + tempoNom, x, y));
                     }
@@ -161,7 +158,7 @@ namespace AntBox.Environnement
                 int colY = random.Next(1, nbLigne+1);
 
                 var zone        = this.ZoneList[((colY - 1) * nbColonne + colX - 1)];
-                var personnage = this.fabriqueAbstraite.CreerPersonnage("Fourmi " + a,  AntWeather.SharedAntWeather, fourmiliere);
+                var personnage = this.fabriqueAbstraite.CreerPersonnage("Fourmi " + a,  AntWeather.SharedAntWeather, Fourmiliere);
 
                 zone.AjouterPersonnage(personnage); //ajout du personnage sur une zone
                 this.AjoutePersonnage(personnage);  //ajout du personnage dans le jardin pour faciliter le binding

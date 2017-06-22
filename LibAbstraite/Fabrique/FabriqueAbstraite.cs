@@ -15,8 +15,5 @@ namespace AntBox.Factory
         public abstract PersonnageAbstrait CreerPersonnage(string nom, Subject unObservé, ZoneAbstraite maison);
         public abstract PersonnageAbstrait CreerPersonnage(string nom, Subject unObservé, ZoneAbstraite maison, EtatPersonnageAbstrait etat);
         public abstract ZoneAbstraite CreerZone(string nom, int positionX, int positionY);
-        public abstract ZoneAbstraite CreerZoneSpeciale(string nom, int positionX, int positionY);
-
-
     }
 }

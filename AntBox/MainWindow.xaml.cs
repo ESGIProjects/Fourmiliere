@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Collections;
 using System.Windows.Threading;
 using System.Threading.Tasks;
+using AntBox.Etat;
 
 namespace AntBox
 { 
@@ -36,8 +37,9 @@ namespace AntBox
         Button load = new Button();
 
         Boolean generation = false;
-        Uri uriAnt = new Uri("./Resources/ant.png", UriKind.Relative);
-        Uri uriCupcake = new Uri("./Resources/cupcake.png", UriKind.Relative);
+        Uri uriAnt = new Uri("./Resources/ant_next.png", UriKind.Relative);
+        Uri uriCupcake = new Uri("./Resources/food.png", UriKind.Relative);
+        Uri uriAntFood = new Uri("./Resources/ant_with_food.png", UriKind.Relative);
         Uri uriAnthill = new Uri("./Resources/anthill.png", UriKind.Relative);
 
         public static AntWeather antWeatherForecast = AntWeather.SharedAntWeather;
@@ -245,25 +247,30 @@ namespace AntBox
 
             foreach (ZoneAbstraite zone in jardin.ZoneList)
             {
-                //TODO AJOUTER un affichage spécial pour la fourmilière
-                //TODO AJOUTER un affichage spécial pour la fourmilière
-                //TODO AJOUTER un affichage spécial pour la fourmilière
-                //TODO AJOUTER un affichage spécial pour la fourmilière
-                //TODO AJOUTER un affichage spécial pour la fourmilière
-                //TODO AJOUTER un affichage spécial pour la fourmilière
-                //TODO AJOUTER un affichage spécial pour la fourmilière
+                //affichage de la fourmiliere
+                System.Windows.Controls.Image imageFourmiliere = new System.Windows.Controls.Image();
+                imageFourmiliere.Source = new BitmapImage(uriAnthill);
+                Grille.Children.Add(imageFourmiliere);
+                Grid.SetColumn(imageFourmiliere, jardin.Fourmiliere.positionX - 1);
+                Grid.SetRow(imageFourmiliere, jardin.Fourmiliere.positionY - 1);
 
+                //affichage des personnages
                 foreach (PersonnageAbstrait personnage in zone.PersonnageList)
                 {
                     System.Windows.Controls.Image image = new System.Windows.Controls.Image();
-                    image.Source = new BitmapImage(uriAnt);
+                    if (personnage.Etat is EtatFourmiFoundFood) {
+                        image.Source = new BitmapImage(uriAntFood);
+                    } else {
+                        image.Source = new BitmapImage(uriAnt);
+                    }
+                    
                     Grille.Children.Add(image);
                     Grid.SetColumn(image, zone.positionX - 1);
                     Grid.SetRow(image, zone.positionY - 1);
                 }
+                //affichage des objets
                 foreach (ObjetAbstrait objet in zone.ObjetList)
                 {
-
                     if (objet is Nourriture) { 
                         System.Windows.Controls.Image imageNourriture = new System.Windows.Controls.Image();
                         imageNourriture.Source = new BitmapImage(uriCupcake);

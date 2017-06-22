@@ -4,7 +4,7 @@ using AntBox.Environnement;
 
 namespace AntBox.Etat
 {
-    class EtatFourmiFoundFood : EtatPersonnageAbstrait
+    public class EtatFourmiFoundFood : EtatPersonnageAbstrait
     {
         ZoneAbstraite Destination = null;
         ZoneAbstraite ZoneSuivante = null;
