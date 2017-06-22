@@ -5,11 +5,14 @@ using AntBox.Etat;
 
 namespace AntBox.Factory
 {
-	public class FabriqueFourmiliere : FabriqueAbstraite
-	{
+    public class FabriqueFourmiliere : FabriqueAbstraite
+    {
         public const string TypeObjetNourriture = "nourriture";
-        public const string TypeObjetOeuf       = "oeuf";
-        public const string TypeObjetPheromone  = "pheromone";
+        public const string TypeObjetOeuf = "oeuf";
+        public const string TypeObjetPheromone = "pheromone";
+
+        //TODO : utiliser une énum dans la fabrique parente et dans la fabrique  (plus élégant)
+        //public  enum TypeNourriture { nourriture, oeuf, pheromone };
 
         public FabriqueFourmiliere()
 		{
@@ -41,15 +44,15 @@ namespace AntBox.Factory
 		}
 
         //création d'une fourmi avec point de vie par défaut 
-        public override PersonnageAbstrait CreerPersonnage(string nom, Subject unObservé, EtatPersonnageAbstrait etat)
+        public override PersonnageAbstrait CreerPersonnage(string nom, Subject unObservé, ZoneAbstraite maison,  EtatPersonnageAbstrait etat)
 		{
-            return new Fourmi(nom, unObservé, etat);
+            return new Fourmi(nom, unObservé, maison, etat);
         }
 
         //création d'une fourmi sans points de vie par défaut
-        public override PersonnageAbstrait CreerPersonnage(string nom, Subject unObservé)
+        public override PersonnageAbstrait CreerPersonnage(string nom, Subject unObservé, ZoneAbstraite maison )
         {
-            return new Fourmi(nom, unObservé, new EtatFourmiAleatoire());
+            return new Fourmi(nom, unObservé, maison, new EtatFourmiAleatoire());
         }
 
         //création d'un boutDeTerrain

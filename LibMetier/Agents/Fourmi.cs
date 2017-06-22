@@ -9,7 +9,7 @@ namespace AntBox
     public class Fourmi : PersonnageAbstrait
 	{
 
-        public Fourmi(string unNom, Subject unObservé, EtatPersonnageAbstrait etat) : base(unNom, unObservé, etat) { }
+        public Fourmi(string unNom, Subject unObservé, ZoneAbstraite maison, EtatPersonnageAbstrait etat) : base(unNom, unObservé, maison, etat) { }
 
 		public override string ToString()
 		{

@@ -86,6 +86,7 @@ namespace AntBox.Environnement
             int nbFourmiAGenerer        = ((nbColonne * nbLigne) / 10);
             int nbNourritureAGenerer    = ((nbColonne * nbLigne) / 20);
 
+            //poour avoir au moins une fourmis et un gateau
             nbFourmiAGenerer        = (nbFourmiAGenerer != 0) ? nbFourmiAGenerer : 1;
             nbNourritureAGenerer    = (nbNourritureAGenerer != 0) ? nbNourritureAGenerer : 1;
 
@@ -105,12 +106,13 @@ namespace AntBox.Environnement
             ZoneAbstraite zoneFin;
             AccesAbstrait acces;
 
+            //la fourmilière
+            ZoneAbstraite fourmiliere = null;
+
             //compteur du nombre de zone (nécessaire quand on génère nos cases)
             int nombreZone = 0;
 
             //////génération du jardin
-
-
             for (int y = 1; y <= nbLigne; y++)
             {
                 for (int x = 1; x <= nbColonne; x++)
@@ -121,7 +123,8 @@ namespace AntBox.Environnement
                     //création de la zone et ajout dans le jardin
                     if ((x ==  positionXFourmiliere) && (y == positionYFourmiliere))
                     {
-                        this.AjouteZoneAbstraites(this.fabriqueAbstraite.CreerZoneSpeciale("Fourmiliere "+tempoNom, x, y));
+                        fourmiliere = this.fabriqueAbstraite.CreerZoneSpeciale("Fourmiliere " + tempoNom, x, y);
+                        this.AjouteZoneAbstraites(fourmiliere);
                     } else  {
                         this.AjouteZoneAbstraites(this.fabriqueAbstraite.CreerZone("Zone " + tempoNom, x, y));
                     }
@@ -157,7 +160,7 @@ namespace AntBox.Environnement
                 int colY = random.Next(1, nbLigne+1);
 
                 var zone        = this.ZoneList[((colY - 1) * nbColonne + colX - 1)];
-                var personnage = this.fabriqueAbstraite.CreerPersonnage("Fourmi " + a, AntWeather.SharedAntWeather);
+                var personnage = this.fabriqueAbstraite.CreerPersonnage("Fourmi " + a,  AntWeather.SharedAntWeather, fourmiliere);
 
                 zone.AjouterPersonnage(personnage); //ajout du personnage sur une zone
                 this.AjoutePersonnage(personnage);  //ajout du personnage dans le jardin pour faciliter le binding

@@ -9,9 +9,18 @@ namespace AntBox.Etat
 {
     class EtatFourmiAleatoire : EtatPersonnageAbstrait
     {
+        protected List<ZoneAbstraite> ZonesPrecedentes = new List<ZoneAbstraite>();
+        protected ZoneAbstraite ZoneSuivante = null;
+
         public override void AnalyseSituation(PersonnageAbstrait personnage)
         {
             Console.WriteLine("Je me trouve sur la zone : " + personnage.ZoneActuelle);
+
+
+           foreach(ZoneAbstraite z in  ZonesPrecedentes)
+            {
+                Console.WriteLine(z.Nom + " déjà parcouru");
+            }
 
             foreach (ObjetAbstrait objet in personnage.ZoneActuelle.ObjetList)
             {
@@ -41,18 +50,25 @@ namespace AntBox.Etat
         {
             List<AccesAbstrait> accesListDisponible = new List<AccesAbstrait>();
             AccesAbstrait accesSuivant;
-            ZoneAbstraite zoneSuivante = null;
+
             Random random = new Random();
 
-            //pour éviter de se déplacer dans une zone avec une Fourmi copie la liste passée en paramêtre
+            if (accesList.Count <= 0)
+                throw new Exception("Fourmi ne peux pas se décider quand accesList est vide");
+
+            //si la zone en cours n'est pas dans la liste des zones parcourues on l'ajoute à la listes des zones connues par notre etat
+            if (!ZonesPrecedentes.Contains(zoneActuelle))
+            {
+                Console.WriteLine(zoneActuelle.Nom + " Ajouté dans ma fourmis");
+                ZonesPrecedentes.Add(zoneActuelle);
+            }
+
             foreach (AccesAbstrait acces in accesList)
             {
                 accesListDisponible.Add(acces);
             }
 
-            if (accesList.Count <= 0)
-                throw new Exception("Fourmi ne peux pas se décider quand accesList est vide");
-
+            Console.WriteLine("Nombre d'accès disponible non utilisés pour le moment : " + accesListDisponible.Count);
 
 
             while (accesListDisponible.Count > 0)
@@ -66,19 +82,22 @@ namespace AntBox.Etat
 
                 if (accesSuivant.ZoneDebut == zoneActuelle)
                 {
-                    zoneSuivante = accesSuivant.ZoneFin;
+                    ZoneSuivante = accesSuivant.ZoneFin;
                 }
                 else
                 {
-                    zoneSuivante = accesSuivant.ZoneDebut;
+                    ZoneSuivante = accesSuivant.ZoneDebut;
                 }
 
-                if (zoneSuivante.PersonnageList.Count > 0)
+                Console.WriteLine(ZoneSuivante.Nom + " est la zone suivante");
+                //Si il y a plusieurs fourmis sur la zone suivante, ou qu'on est déjà allé sur cette zone on regarde l'accès suivant
+                if ((ZoneSuivante.PersonnageList.Count > 0) || (ZonesPrecedentes.Contains(ZoneSuivante)))
                 {
+                    Console.WriteLine(ZoneSuivante.Nom + " annulée");
                     Console.WriteLine(">0");
                     accesListDisponible.RemoveAt(tempo);
 
-                    zoneSuivante = null;
+                    ZoneSuivante = null;
                 }
                 else
                 {
@@ -88,11 +107,20 @@ namespace AntBox.Etat
                 }
             }
 
-            return zoneSuivante;
+            
+            return ZoneSuivante;
         }
 
         public override void Execution()
         {
+            this.ZonesPrecedentes.Add(ZoneSuivante);
+            ZoneSuivante = null;
+            //pour éviter de bloquer une fourmis trop longtemps, pour une
+            if (ZonesPrecedentes.Count > 5)
+            {
+                ZonesPrecedentes.RemoveAt(0);
+            }
+
             Console.WriteLine("execution");
         }
     }

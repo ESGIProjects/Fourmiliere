@@ -13,6 +13,7 @@ namespace AntBox
         public Subject Observe { get; protected set; }
         protected EtatPersonnageAbstrait Etat;
         public ZoneAbstraite ZoneActuelle { get; set; }
+        public ZoneAbstraite maison { get; protected set; }
 
         public virtual void AnalyseSituation()
         {
@@ -28,11 +29,12 @@ namespace AntBox
             Etat.Execution();
         }
 
-		public PersonnageAbstrait(string unNom, Subject observe, EtatPersonnageAbstrait etat) {
+		public PersonnageAbstrait(string unNom, Subject observe, ZoneAbstraite maison, EtatPersonnageAbstrait etat) {
 			Nom = unNom;
             Observe = observe;
             Etat = etat;
             observe.Attach(this);
+            this.maison = maison;
 		}
     }
 }
