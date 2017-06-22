@@ -45,6 +45,7 @@
     <Compile Include="Environnement\Fourmiliere.cs" />
     <Compile Include="Environnement\BoutDeTerrain.cs" />
     <Compile Include="Environnement\Jardin.cs" />
+    <Compile Include="Etat\EtatFourmiFoundFood.cs" />
     <Compile Include="Etat\EtatFourmiAleatoire.cs" />
     <Compile Include="Fabrique\FabriqueFourmiliere.cs" />
     <Compile Include="Objets\Nourriture.cs" />

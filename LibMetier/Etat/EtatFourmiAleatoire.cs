@@ -27,6 +27,9 @@ namespace AntBox.Etat
                 }
             }
 
+            if (found == true)
+                personnage.Etat = new EtatFourmiFoundFood();
+
             Console.WriteLine("Je viens d'analyser la situation");
         }
 
