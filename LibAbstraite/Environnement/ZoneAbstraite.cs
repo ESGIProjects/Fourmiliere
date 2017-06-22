@@ -5,7 +5,8 @@ namespace AntBox.Environnement
 {
 	public abstract class ZoneAbstraite
 	{
-		public string Nom { get; protected set; }
+
+        public string Nom { get; protected set; }
 		public List<ObjetAbstrait> ObjetList { get; protected set; }
 		public List<PersonnageAbstrait> PersonnageList { get; protected set; }
 		public List<AccesAbstrait> AccesList { get; protected set; }

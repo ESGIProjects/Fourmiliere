@@ -9,12 +9,13 @@ namespace AntBox.Etat
 {
     class EtatFourmiNourritureFound : EtatPersonnageAbstrait
     {
-        ZoneAbstraite destination = null;
+        protected ZoneAbstraite Destination = null;
+        protected ZoneAbstraite ZoneSuivante = null;
 
         public override void AnalyseSituation(PersonnageAbstrait personnage)
         {
             Console.WriteLine("Je porte de la bouffe ! ! ! ! !");
-            //this.destination = personnage.maison;
+            this.Destination = personnage.maison;
             Console.WriteLine("Je viens d'analyser la situation");
         }
 
@@ -24,6 +25,30 @@ namespace AntBox.Etat
             Console.WriteLine("Je suis ici : " + zoneActuelle.Nom);
             Console.WriteLine("Je dois me rendre ici  : " + destination);
 
+            if (Destination == null)
+                return null;
+
+            foreach (AccesAbstrait accesSuivant in accesList)
+            {
+                if (accesSuivant.ZoneDebut == zoneActuelle)  {
+                    ZoneSuivante = accesSuivant.ZoneFin;
+                }
+                else {
+                    ZoneSuivante = accesSuivant.ZoneDebut;
+                }
+
+                if ((zoneActuelle.postionX > destination.positionX) && (ZoneSuivante.postionX < zoneActuelle.positionX))
+                {
+                    return ZoneSuivante;
+                } else if ((zoneActuelle.postionX < destination.positionX) && (ZoneSuivante.postionX > zoneActuelle.positionX))
+                {
+                    return ZoneSuivante;
+                }
+
+
+
+
+            }
 
 
             return null;
