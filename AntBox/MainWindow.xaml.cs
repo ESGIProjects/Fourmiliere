@@ -68,7 +68,7 @@ namespace AntBox
             Console.WriteLine("\n\n\nBOUCLE SIMULATION\n\n\n");
             Console.WriteLine(jardin.Simuler());
             genereAffichage();
-            await Task.Delay(1000);
+            await Task.Delay(100);
         }
 
         private async void runClick(object sender, RoutedEventArgs e)
@@ -255,21 +255,7 @@ namespace AntBox
                 Grid.SetColumn(imageFourmiliere, jardin.Fourmiliere.positionX - 1);
                 Grid.SetRow(imageFourmiliere, jardin.Fourmiliere.positionY - 1);
 
-                //affichage des personnages
-                foreach (PersonnageAbstrait personnage in zone.PersonnageList)
-                {
-                    System.Windows.Controls.Image image = new System.Windows.Controls.Image();
-                    if (personnage.Etat is EtatFourmiFoundFood) {
-                        image.Source = new BitmapImage(uriAntFood);
-                    } else {
-                        image.Source = new BitmapImage(uriAnt);
-                    }
-                    
-                    Grille.Children.Add(image);
-                    Grid.SetColumn(image, zone.positionX - 1);
-                    Grid.SetRow(image, zone.positionY - 1);
-                }
-
+               
                 //affichage des objets
                 foreach (ObjetAbstrait objet in zone.ObjetList) {
                     if (objet is Nourriture) { 
@@ -291,6 +277,25 @@ namespace AntBox
                         Grid.SetRow(imageNourriture, zone.positionY - 1);
                     }
                 }
+
+                //affichage des personnages
+                foreach (PersonnageAbstrait personnage in zone.PersonnageList)
+                {
+                    System.Windows.Controls.Image image = new System.Windows.Controls.Image();
+                    if (personnage.Etat is EtatFourmiFoundFood)
+                    {
+                        image.Source = new BitmapImage(uriAntFood);
+                    }
+                    else
+                    {
+                        image.Source = new BitmapImage(uriAnt);
+                    }
+
+                    Grille.Children.Add(image);
+                    Grid.SetColumn(image, zone.positionX - 1);
+                    Grid.SetRow(image, zone.positionY - 1);
+                }
+
             }
         }
 
