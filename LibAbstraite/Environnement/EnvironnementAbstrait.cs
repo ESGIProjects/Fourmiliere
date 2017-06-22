@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using AntBox.Factory;
+using System.Collections.ObjectModel;
 
 namespace AntBox.Environnement
 {
@@ -14,7 +15,7 @@ namespace AntBox.Environnement
 		public List<ObjetAbstrait> ObjetList { get; protected set; }
 		public List<AccesAbstrait> AccesList { get; protected set; }
 		public List<ZoneAbstraite> ZoneList { get; protected set; }
-        public List<PersonnageAbstrait> PersonnageList { get; protected set; }
+        public ObservableCollection<PersonnageAbstrait> PersonnageList { get; protected set; }
         public FabriqueAbstraite fabriqueAbstraite;
 
         //le constructeur

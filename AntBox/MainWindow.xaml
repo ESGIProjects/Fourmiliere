@@ -59,27 +59,17 @@
                 Width="Auto"
                 Height="Auto"
                 Grid.Column="4"
-                Click="loadClick"
+                Click="rainClick"
             />
         </Grid>
 
-        <ListBox Grid.Column="0" Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Auto" ItemsSource="{Binding jardin.ZoneList}">
+        <ListBox Grid.Column="0" Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Auto" ItemsSource="{Binding jardin.PersonnageList}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <ListBox ItemsSource="{Binding PersonnageList}">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel x:Name="fourmiStack">
-                                    <TextBlock Text="{Binding Nom}" FontSize="14px" FontWeight="Bold" />
-                                </StackPanel>
-                                <DataTemplate.Triggers>
-                                    <DataTrigger Binding="{Binding Nom}" Value="{x:Null}">
-                                        <Setter TargetName="fourmiStack" Property="Visibility" Value="Hidden" />
-                                    </DataTrigger>
-                                </DataTemplate.Triggers>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
+                    <StackPanel>
+                        <TextBlock Text="{Binding Nom}" FontSize="18px" FontWeight="Bold" />
+                        <TextBlock Text="{Binding ZoneActuelle.PositionString}" FontSize="14px" />
+                    </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>

@@ -38,6 +38,7 @@ namespace AntBox
         Boolean generation = false;
         Uri uriAnt = new Uri("./Resources/ant.png", UriKind.Relative);
         Uri uriCupcake = new Uri("./Resources/cupcake.png", UriKind.Relative);
+        Uri uriAnthill = new Uri("./Resources/anthill.png", UriKind.Relative);
 
         public static AntWeather antWeatherForecast = AntWeather.SharedAntWeather;
 
@@ -92,7 +93,8 @@ namespace AntBox
 
         private void saveClick(object sender, RoutedEventArgs e)
         {
-            if (!generation) {
+            if (!generation)
+            {
                 string message = "Veuillez commencer une partie avant !!";
                 string titre = "Erreur";
                 MessageBoxButton mbb = MessageBoxButton.OK;
@@ -108,7 +110,7 @@ namespace AntBox
                     MessageBoxButton mbbFile = MessageBoxButton.YesNo;
                     MessageBoxImage mbiFile = MessageBoxImage.Question;
                     MessageBoxResult mbr = MessageBox.Show(messageFile, titreFile, mbbFile, mbiFile);
-                    if(mbr == MessageBoxResult.Yes)
+                    if (mbr == MessageBoxResult.Yes)
                     {
                         File.Delete("save.xml");
                     }
@@ -117,15 +119,31 @@ namespace AntBox
                         return;
                     }
                 }
-                new System.Xml.Linq.XDocument(
-                    new System.Xml.Linq.XElement("grid",
+
+                var doc = new System.Xml.Linq.XDocument(
+                    new System.Xml.Linq.XElement("Grid",
                          new System.Xml.Linq.XElement("rows", Grille.RowDefinitions.Count),
                          new System.Xml.Linq.XElement("cols", Grille.ColumnDefinitions.Count)
                     )
-                ).Save("save.xml");
+                );
 
+                System.Xml.Linq.XElement antlist = new System.Xml.Linq.XElement("AntList");
 
-               System.Media.SoundPlayer sp = new System.Media.SoundPlayer(AntBox.Properties.Resources.kaching);
+                foreach (ZoneAbstraite za in jardin.ZoneList)
+                {
+                    foreach (PersonnageAbstrait pa in za.PersonnageList)
+                    {
+                        antlist.Add(
+                          new System.Xml.Linq.XElement("ant",
+                            new System.Xml.Linq.XElement("Name", pa.Nom)));
+                        //new System.Xml.Linq.XElement("Position X", za.positionX),
+                        //new System.Xml.Linq.XElement("Position Y", za.positionY)));
+                    }
+                }
+                doc.Root.Add(antlist);
+                doc.Save("save.xml");
+
+                System.Media.SoundPlayer sp = new System.Media.SoundPlayer(AntBox.Properties.Resources.kaching);
                 sp.Load();
                 sp.Play();
 
@@ -207,6 +225,7 @@ namespace AntBox
 
             //permet d'afficher la simulation
             genereAffichage();
+            Grille.Background = new SolidColorBrush(Colors.LightGreen);
 
             //Reporting
             Console.WriteLine(jardin.Statistiques());
@@ -256,10 +275,10 @@ namespace AntBox
             }
         }
 
-        public void drawEllipse(Grid grid, int x, int y, int colSpan = 1, int rowSpan = 1)
+        public Ellipse drawRainEllipse(Grid grid, int x, int y, int colSpan = 1, int rowSpan = 1)
         {
             Ellipse ellipse = new Ellipse();
-            ellipse.Fill = new SolidColorBrush(Colors.Red);
+            ellipse.Fill = new SolidColorBrush(Colors.Blue);
             ellipse.Margin = new Thickness(3);
             ellipse.Opacity = 0.5;
 
@@ -268,6 +287,8 @@ namespace AntBox
             Grid.SetRow(ellipse, y);
             Grid.SetColumnSpan(ellipse, colSpan);
             Grid.SetRowSpan(ellipse, rowSpan);
+
+            return ellipse;
         }
 
         public UIElement getGridChild(Grid grid, int x, int y)
