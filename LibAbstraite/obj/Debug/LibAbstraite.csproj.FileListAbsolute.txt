@@ -19,3 +19,8 @@ C:\Users\kevin\Desktop\C#\Fourmiliere\LibAbstraite\bin\Debug\LibAbstraite.pdb
 C:\Users\kevin\Desktop\C#\Fourmiliere\LibAbstraite\obj\Debug\LibAbstraite.csprojResolveAssemblyReference.cache
 C:\Users\kevin\Desktop\C#\Fourmiliere\LibAbstraite\obj\Debug\LibAbstraite.dll
 C:\Users\kevin\Desktop\C#\Fourmiliere\LibAbstraite\obj\Debug\LibAbstraite.pdb
+C:\Users\Jason\Desktop\Fourmiliere\LibAbstraite\bin\Debug\LibAbstraite.dll
+C:\Users\Jason\Desktop\Fourmiliere\LibAbstraite\bin\Debug\LibAbstraite.pdb
+C:\Users\Jason\Desktop\Fourmiliere\LibAbstraite\obj\Debug\LibAbstraite.csprojResolveAssemblyReference.cache
+C:\Users\Jason\Desktop\Fourmiliere\LibAbstraite\obj\Debug\LibAbstraite.dll
+C:\Users\Jason\Desktop\Fourmiliere\LibAbstraite\obj\Debug\LibAbstraite.pdb

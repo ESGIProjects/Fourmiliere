@@ -34,5 +34,13 @@ namespace AntBox.Environnement
                 "\n   " + PersonnageList.Count + " personnages"+
                 "\n   " + ObjetList.Count + " objets";
         }
+
+        public string PositionString
+        {
+            get
+            {
+                return "Zone : ("+ this.positionX + "," + this.positionY + ")";
+            }
+        }
     }
 }

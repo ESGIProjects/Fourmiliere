@@ -6,18 +6,19 @@ using System.Threading.Tasks;
 using AntBox.Factory;
 using AntBox;
 using AntBox.Observateur;
+using System.Collections.ObjectModel;
 
 namespace AntBox.Environnement
 {
     public class Jardin : EnvironnementAbstrait
     {
-        public Jardin(FabriqueAbstraite fabrique) :base(fabrique)
+        public Jardin(FabriqueAbstraite fabrique) : base(fabrique)
         {
             ObjetList = new List<ObjetAbstrait>();
             AccesList = new List<AccesAbstrait>();
             ZoneList = new List<ZoneAbstraite>();
-            PersonnageList = new List<PersonnageAbstrait>();
-         }
+            PersonnageList = new ObservableCollection<PersonnageAbstrait>();
+        }
 
         public override void AjouteChemins(/*FabriqueAbstraite fabrique, */params AccesAbstrait[] accesArray)
         {
