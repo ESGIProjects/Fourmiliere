@@ -123,33 +123,112 @@ namespace AntBox
                     }
                 }
 
-                var doc = new System.Xml.Linq.XDocument(
-                    new System.Xml.Linq.XElement("Grid",
-                         new System.Xml.Linq.XElement("rows", Grille.RowDefinitions.Count),
-                         new System.Xml.Linq.XElement("cols", Grille.ColumnDefinitions.Count)
-                    )
-                );
+                var grilleDocument = new System.Xml.Linq.XElement("Grille");
+                grilleDocument.Add(new System.Xml.Linq.XElement("cols", Grille.ColumnDefinitions.Count));
+                grilleDocument.Add(new System.Xml.Linq.XElement("rows", Grille.RowDefinitions.Count));
 
-                System.Xml.Linq.XElement antlist = new System.Xml.Linq.XElement("AntList");
+                var document = new System.Xml.Linq.XDocument(grilleDocument);
 
-                foreach (ZoneAbstraite za in jardin.ZoneList)
+                var jardinDocument = new System.Xml.Linq.XElement("jardin");
+
+                var fabriqueAbstraiteDocument = new System.Xml.Linq.XElement("fabriqueAbstraite");
+                fabriqueAbstraiteDocument.Add(new System.Xml.Linq.XElement("Titre", jardin.fabriqueAbstraite.Titre));
+                jardinDocument.Add(fabriqueAbstraiteDocument);
+
+                var objetListDocument = new System.Xml.Linq.XElement("ObjetList");
+                foreach (ObjetAbstrait objet in jardin.ObjetList)
                 {
-                    foreach (PersonnageAbstrait pa in za.PersonnageList)
+                    var objetDocument = new System.Xml.Linq.XElement("Objet");
+
+                    if (objet.Position != null)
                     {
-                        antlist.Add(
-                          new System.Xml.Linq.XElement("ant",
-                            new System.Xml.Linq.XElement("Name", pa.Nom)));
-                        //new System.Xml.Linq.XElement("Position X", za.positionX),
-                        //new System.Xml.Linq.XElement("Position Y", za.positionY)));
+                        var position = new System.Xml.Linq.XElement("Position");
+                        position.Add(new System.Xml.Linq.XElement("X", objet.Position.positionX));
+                        position.Add(new System.Xml.Linq.XElement("Y", objet.Position.positionY));
+                        objetDocument.Add(position);
                     }
+                    
+                    objetDocument.Add(new System.Xml.Linq.XElement("Nom", objet.Nom));
+                    objetDocument.Add(new System.Xml.Linq.XElement("HPMax", objet.HPMax));
+                    objetDocument.Add(new System.Xml.Linq.XElement("HP", objet.HP));
+
+                    objetListDocument.Add(objetDocument);
                 }
-                doc.Root.Add(antlist);
-                doc.Save("save.xml");
+                jardinDocument.Add(objetListDocument);
+
+
+                var accesListDocument = new System.Xml.Linq.XElement("AccesList");
+                foreach (AccesAbstrait acces in jardin.AccesList)
+                {
+                    var accesDocument = new System.Xml.Linq.XElement("Acces");
+
+                    if (acces.ZoneDebut != null)
+                    {
+                        var zoneDebut = new System.Xml.Linq.XElement("ZoneDebut");
+                        zoneDebut.Add(new System.Xml.Linq.XElement("X", acces.ZoneDebut.positionX));
+                        zoneDebut.Add(new System.Xml.Linq.XElement("Y", acces.ZoneDebut.positionY));
+                        accesDocument.Add(zoneDebut);
+                    }
+
+                    if (acces.ZoneFin != null)
+                    {
+                        var zoneFin = new System.Xml.Linq.XElement("ZoneFin");
+                        zoneFin.Add(new System.Xml.Linq.XElement("X", acces.ZoneFin.positionX));
+                        zoneFin.Add(new System.Xml.Linq.XElement("Y", acces.ZoneFin.positionY));
+                        accesDocument.Add(zoneFin);
+                    }
+
+                    accesListDocument.Add(accesDocument);
+                }
+                jardinDocument.Add(accesListDocument);
+
+                var zoneListDocument = new System.Xml.Linq.XElement("ZoneList");
+                foreach (ZoneAbstraite zone in jardin.ZoneList)
+                {
+                    var zoneDocument = new System.Xml.Linq.XElement("Zone");
+                    zoneDocument.Add(new System.Xml.Linq.XElement("Nom", zone.Nom));
+                    zoneDocument.Add(new System.Xml.Linq.XElement("X", zone.positionX));
+                    zoneDocument.Add(new System.Xml.Linq.XElement("Y", zone.positionY));
+
+                    zoneListDocument.Add(zoneDocument);
+                }
+                jardinDocument.Add(zoneListDocument);
+
+
+                var personnageListDocument = new System.Xml.Linq.XElement("PersonnageList");
+                foreach (PersonnageAbstrait personnage in jardin.PersonnageList)
+                {
+                    var personnageDocument = new System.Xml.Linq.XElement("Personnage");
+                    personnageDocument.Add(new System.Xml.Linq.XElement("Nom", personnage.Nom));
+                    personnageDocument.Add(new System.Xml.Linq.XElement("Observe", personnage.Observe));
+                    personnageDocument.Add(new System.Xml.Linq.XElement("Etat", personnage.Etat));
+
+                    if (personnage.ZoneActuelle != null)
+                    {
+                        var zoneActuelle = new System.Xml.Linq.XElement("ZoneActuelle");
+                        zoneActuelle.Add(new System.Xml.Linq.XElement("X", personnage.ZoneActuelle.positionX));
+                        zoneActuelle.Add(new System.Xml.Linq.XElement("Y", personnage.ZoneActuelle.positionY));
+                        personnageDocument.Add(zoneActuelle);
+                    }
+
+                    if (personnage.maison != null)
+                    {
+                        var maison = new System.Xml.Linq.XElement("maison");
+                        maison.Add(new System.Xml.Linq.XElement("X", personnage.maison.positionX));
+                        maison.Add(new System.Xml.Linq.XElement("Y", personnage.maison.positionY));
+                        personnageDocument.Add(maison);
+                    }
+
+                    personnageListDocument.Add(personnage);
+                }
+                jardinDocument.Add(personnageListDocument);
+
+                document.Root.Add(jardinDocument);
+                document.Save("save.xml");
 
                 System.Media.SoundPlayer sp = new System.Media.SoundPlayer(AntBox.Properties.Resources.kaching);
                 sp.Load();
                 sp.Play();
-
 
                 string message = "Sauvegarde effectuée !";
                 string titre = "Sauvegarde";
