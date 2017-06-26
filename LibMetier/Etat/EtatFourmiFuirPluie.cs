@@ -4,20 +4,22 @@ using AntBox.Environnement;
 
 namespace AntBox.Etat
 {
-    public class EtatFourmiFoundFood : EtatPersonnageAbstrait
+    public class EtatFourmiFuirPluie : EtatPersonnageAbstrait
     {
         ZoneAbstraite Destination = null;
         ZoneAbstraite ZoneSuivante = null;
 
         public override void AnalyseSituation(PersonnageAbstrait personnage)
         {
-            Console.WriteLine(personnage.Nom + " à de la nourriture ");
+            Console.WriteLine(personnage.Nom + " cherche à rentrer rapidement dans la fourmillière pour cause de prévision de pluie ");
 
-            if ((ZoneSuivante == Destination) && (Destination != null)) {
-                Console.WriteLine(personnage.Nom + " vient d'apporter la nourriture dans la fourmilière ! ! ! ! ");
-                personnage.Etat = new EtatFourmiAleatoire();
-            } else if (personnage.maison != null) {
-                Console.WriteLine(personnage.Nom + " cherche à rapporter la nourriture dans la fourmilière ");
+            if ((ZoneSuivante == Destination) && (Destination != null))
+            {
+                Console.WriteLine(personnage.Nom + " est à l'abri et ne bouge pas ! ! ! ! ");
+                //personnage.Etat = new EtatFourmiAbri();
+            }
+            else if (personnage.maison != null)
+            {
                 Destination = personnage.maison;
             }
         }
@@ -29,8 +31,9 @@ namespace AntBox.Etat
 
             if ((Destination != null) && (Destination == zoneActuelle))
             {
-                Console.WriteLine("J'ai apporté la nourriture à la fourmilière ");
-            }else  if (Destination != null)
+                Console.WriteLine("Je suis à l'abri  ! ! ! ");
+            }
+            else if (Destination != null)
             {
                 foreach (AccesAbstrait accesSuivant in accesList)
                 {
@@ -50,7 +53,8 @@ namespace AntBox.Etat
                     else if ((zoneActuelle.positionX < Destination.positionX) && (ZoneSuivante.positionX > zoneActuelle.positionX))
                     {
                         return ZoneSuivante;
-                    } else if ((zoneActuelle.positionY > Destination.positionY) && (ZoneSuivante.positionY < zoneActuelle.positionY))
+                    }
+                    else if ((zoneActuelle.positionY > Destination.positionY) && (ZoneSuivante.positionY < zoneActuelle.positionY))
                     {
                         return ZoneSuivante;
                     }
@@ -59,7 +63,8 @@ namespace AntBox.Etat
                         return ZoneSuivante;
                     }
                 }
-            } else
+            }
+            else
             {
                 Console.WriteLine("Pas de destination... Houston il y a un problème ");
             }
