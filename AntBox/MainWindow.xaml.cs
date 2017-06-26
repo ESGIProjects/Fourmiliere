@@ -21,12 +21,8 @@ namespace AntBox
     /// </summary>
     public partial class MainWindow : Window
     {
-
-        Button run = new Button();
-        Button save = new Button();
-        Button load = new Button();
-
         Boolean generation = false;
+        Boolean inProgress = false;
         Uri uriAnt = new Uri("./Resources/ant_next.png", UriKind.Relative);
         Uri uriCupcake = new Uri("./Resources/food.png", UriKind.Relative);
         Uri uriAntFood = new Uri("./Resources/ant_with_food.png", UriKind.Relative);
@@ -53,14 +49,17 @@ namespace AntBox
 
             if (TimerPuie == 0)
             {
+                RainButton.Content = "Il pleut";
                 AntWeather.SharedAntWeather.Etat = AntWeather.RainIsHere;
             }
             else if (TimerPuie == -1)
             {
+                RainButton.Content = "Faire pleuvoir";
                 AntWeather.SharedAntWeather.Etat = AntWeather.RainIsFinished;
             }
             else if (TimerPuie > 0)
             {
+                RainButton.Content = "Il va pleuvoir dans " + TimerPuie + " tour(s)";
                 Console.WriteLine("\n\n\nIl va pleuvoir dans " + TimerPuie + " tour(s) \n\n\n");
             }
 
@@ -74,9 +73,20 @@ namespace AntBox
         {
             if (generation)
             {
-                while (true)
+                if (inProgress == false) { 
+                    RunButton.Background = new SolidColorBrush(Colors.Green);
+                    RunButton.Content = "In progress...";
+                    inProgress = true;
+
+                    while (inProgress)
+                    {
+                        await PutTaskDelay();
+                    } 
+                } else
                 {
-                    await PutTaskDelay();
+                    RunButton.Background = new SolidColorBrush(Colors.Orange);
+                    RunButton.Content = "Continue";
+                    inProgress = false;
                 }
             }
             else
@@ -91,15 +101,29 @@ namespace AntBox
 
         private void weatherClick(object sender, RoutedEventArgs e)
         {
-            if (TimerPuie < 0) { 
-                TimerPuie = 5;
-                AntWeather.SharedAntWeather.Etat = AntWeather.RainIsComing;
-            } else
+
+            if (!generation)
             {
-                string message = "Il va bientôt pleuvoir !!";
+                string message = "Veuillez commencer une partie avant !!";
                 string titre = "Erreur";
                 MessageBoxButton mbb = MessageBoxButton.OK;
-                MessageBox.Show(message, titre, mbb);
+                MessageBoxImage mbi = MessageBoxImage.Error;
+                MessageBox.Show(message, titre, mbb, mbi);
+            }
+            else
+            {
+
+                if (TimerPuie < -1) {
+                    TimerPuie = 5;
+                    AntWeather.SharedAntWeather.Etat = AntWeather.RainIsComing;
+                }
+                else
+                {
+                    string message = "VEuillez patienter...";
+                    string titre = "Erreur";
+                    MessageBoxButton mbb = MessageBoxButton.OK;
+                    MessageBox.Show(message, titre, mbb);
+                }
             }
         }
 
