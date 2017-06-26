@@ -19,7 +19,6 @@ namespace AntBox.Etat
 
             foreach (ObjetAbstrait objet in personnage.ZoneActuelle.ObjetList)
             {
-
                 if (objet is Nourriture)
                 {
                     Console.WriteLine("IL Y A DE LA BOUFFE OU JE SUIS ! ! ! ! ! ! ! ");
