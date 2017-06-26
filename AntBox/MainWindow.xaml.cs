@@ -50,11 +50,13 @@ namespace AntBox
             if (TimerPuie == 0)
             {
                 RainButton.Content = "Il pleut";
+                Grille.Background = new SolidColorBrush(Colors.Blue);
                 AntWeather.SharedAntWeather.Etat = AntWeather.RainIsHere;
             }
             else if (TimerPuie == -1)
             {
                 RainButton.Content = "Faire pleuvoir";
+                Grille.Background = new SolidColorBrush(Colors.LightGreen);
                 AntWeather.SharedAntWeather.Etat = AntWeather.RainIsFinished;
             }
             else if (TimerPuie > 0)
