@@ -42,6 +42,9 @@ namespace AntBox
         Uri uriAntFood = new Uri("./Resources/ant_with_food.png", UriKind.Relative);
         Uri uriAnthill = new Uri("./Resources/anthill.png", UriKind.Relative);
         Uri uriSugar = new Uri("./Resources/sugar.png", UriKind.Relative);
+        Uri deathAnt = new Uri("./Resources/death_ant.png", UriKind.Relative);
+
+        protected int TimerPuie  { get; set; } = -2;
 
         public static AntWeather antWeatherForecast = AntWeather.SharedAntWeather;
 
@@ -66,15 +69,29 @@ namespace AntBox
         async Task PutTaskDelay()
         {
             Console.WriteLine("\n\n\nBOUCLE SIMULATION\n\n\n");
+            TimerPuie--;
+
+            if (TimerPuie == 0)
+            {
+                AntWeather.SharedAntWeather.Etat = AntWeather.RainIsHere;
+            }
+            else if (TimerPuie == -1)
+            {
+                AntWeather.SharedAntWeather.Etat = AntWeather.RainIsFinished;
+            }
+            else if (TimerPuie > 0)
+            {
+                Console.WriteLine("\n\n\nIl va pleuvoir dans " + TimerPuie + " tour(s) \n\n\n");
+            }
+
+
             Console.WriteLine(jardin.Simuler());
             genereAffichage();
-            await Task.Delay(100);
+            await Task.Delay(1000);
         }
 
         private async void runClick(object sender, RoutedEventArgs e)
         {
-
-            
             if (generation)
             {
                 while (true)
@@ -89,9 +106,21 @@ namespace AntBox
                 MessageBoxButton mbb = MessageBoxButton.OK;
                 MessageBoxImage mbi = MessageBoxImage.Error;
                 MessageBox.Show(message, titre, mbb, mbi);
-
             }
+        }
 
+        private void weatherClick(object sender, RoutedEventArgs e)
+        {
+            if (TimerPuie < 0) { 
+                TimerPuie = 5;
+                AntWeather.SharedAntWeather.Etat = AntWeather.RainIsComing;
+            } else
+            {
+                string message = "Il va bientôt pleuvoir !!";
+                string titre = "Erreur";
+                MessageBoxButton mbb = MessageBoxButton.OK;
+                MessageBox.Show(message, titre, mbb);
+            }
         }
 
         private void saveClick(object sender, RoutedEventArgs e)
@@ -312,8 +341,7 @@ namespace AntBox
             //Reporting
             Console.WriteLine(jardin.Statistiques());
 
-
-            antWeatherForecast.Etat = "Il fait beau !";
+            //indication que la grille est générée
             generation = true;
         }
 
@@ -365,7 +393,10 @@ namespace AntBox
                     {
                         image.Source = new BitmapImage(uriAntFood);
                     }
-                    else
+                    else if (personnage.Etat is EtatFourmiMorte)
+                    {
+                        image.Source = new BitmapImage(deathAnt);
+                    } else
                     {
                         image.Source = new BitmapImage(uriAnt);
                     }
@@ -374,7 +405,6 @@ namespace AntBox
                     Grid.SetColumn(image, zone.positionX - 1);
                     Grid.SetRow(image, zone.positionY - 1);
                 }
-
             }
         }
 

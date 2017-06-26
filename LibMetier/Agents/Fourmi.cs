@@ -19,6 +19,25 @@ namespace AntBox
         public override void Update()
         {
             Console.WriteLine(Nom + " sait que " + Observe.Etat);
+
+            if (!(this.Etat is EtatFourmiMorte))
+            {
+                if (Observe.Etat == AntWeather.RainIsComing)
+                {
+                    this.Etat = new EtatFourmiFuirPluie();
+                }
+                else if (Observe.Etat == AntWeather.RainIsHere)
+                {
+                    if (!(this.Etat is EtatFourmiAbrite))
+                    {
+                        this.Etat = new EtatFourmiMorte();
+                    }
+                }
+                else if (Observe.Etat == AntWeather.RainIsFinished)
+                {
+                    this.Etat = new EtatFourmiAleatoire();
+                }
+            }
         }
     }
 }

@@ -55,7 +55,13 @@
                 Grid.Column="3"
                 Click="loadClick"
             />
-            <Label Width="Auto" Height="Auto" Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Etat de la map" FontSize="14px" />
+
+            <Button Content="Pluie"
+                Width="Auto"
+                Height="Auto"
+                Grid.Column="4"
+                Click="weatherClick"
+            />
         </Grid>
 
         <ListBox Grid.Column="0" Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Auto" ItemsSource="{Binding jardin.PersonnageList}">

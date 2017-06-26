@@ -11,7 +11,8 @@ namespace AntBox.Etat
 
         public override void AnalyseSituation(PersonnageAbstrait personnage)
         {
-            Console.WriteLine(personnage.Nom + " à de la nourriture ");
+            Console.WriteLine(personnage.Nom + "(EtatFourmiFoundFood) se trouve sur la zone : " + personnage.ZoneActuelle.Nom);
+            //Console.WriteLine(personnage.Nom + " à de la nourriture ");
 
             if ((ZoneSuivante == Destination) && (Destination != null)) {
                 Console.WriteLine(personnage.Nom + " vient d'apporter la nourriture dans la fourmilière ! ! ! ! ");

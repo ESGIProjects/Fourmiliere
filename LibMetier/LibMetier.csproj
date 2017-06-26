@@ -44,6 +44,8 @@
     <Compile Include="Environnement\Acces.cs" />
     <Compile Include="Environnement\BoutDeTerrain.cs" />
     <Compile Include="Environnement\Jardin.cs" />
+    <Compile Include="Etat\EtatFourmiAbrite.cs" />
+    <Compile Include="Etat\EtatFourmiMorte.cs" />
     <Compile Include="Etat\EtatFourmiFuirPluie.cs" />
     <Compile Include="Etat\EtatFourmiFoundFood.cs" />
     <Compile Include="Etat\EtatFourmiAleatoire.cs" />

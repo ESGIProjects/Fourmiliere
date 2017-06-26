@@ -11,12 +11,12 @@ namespace AntBox.Etat
 
         public override void AnalyseSituation(PersonnageAbstrait personnage)
         {
-            Console.WriteLine(personnage.Nom + " cherche à rentrer rapidement dans la fourmillière pour cause de prévision de pluie ");
+            Console.WriteLine(personnage.Nom + "(EtatFourmiFuirPluie) se trouve sur la zone : " + personnage.ZoneActuelle.Nom);
 
             if ((ZoneSuivante == Destination) && (Destination != null))
             {
                 Console.WriteLine(personnage.Nom + " est à l'abri et ne bouge pas ! ! ! ! ");
-                //personnage.Etat = new EtatFourmiAbri();
+                personnage.Etat = new EtatFourmiAbrite();
             }
             else if (personnage.maison != null)
             {

@@ -14,7 +14,7 @@ namespace AntBox.Etat
 
         public override void AnalyseSituation(PersonnageAbstrait personnage)
         {
-            Console.WriteLine("Je me trouve sur la zone : " + personnage.ZoneActuelle);
+            Console.WriteLine(personnage.Nom + "(EtatPersonnageAbstrait) se trouve sur la zone : " + personnage.ZoneActuelle.Nom);
             Boolean found = false;
 
             foreach (ObjetAbstrait objet in personnage.ZoneActuelle.ObjetList)
@@ -28,8 +28,6 @@ namespace AntBox.Etat
 
             if (found == true)
                 personnage.Etat = new EtatFourmiFoundFood();
-
-            Console.WriteLine("Je viens d'analyser la situation");
         }
 
         public override ZoneAbstraite ChoixZoneSuivante(List<AccesAbstrait> accesList, ZoneAbstraite zoneActuelle)
