@@ -13,6 +13,7 @@ using System.Collections;
 using System.Windows.Threading;
 using System.Threading.Tasks;
 using AntBox.Etat;
+using System.Xml;
 
 namespace AntBox
 { 
@@ -298,7 +299,64 @@ namespace AntBox
             if (result == true)
             {
                 string filename = ofd.FileName;
-                Console.Write(filename);
+                Console.WriteLine(filename);
+
+                XmlDocument document = new XmlDocument();
+                document.Load(filename);
+
+                // Grille
+                XmlNode grilleNode = document.DocumentElement.SelectSingleNode("/Document/Grille");
+                int rows = int.Parse(grilleNode.SelectSingleNode("rows").InnerText);
+                int cols = int.Parse(grilleNode.SelectSingleNode("cols").InnerText);
+                Console.WriteLine(rows);
+                Console.WriteLine(cols);
+
+                // Début du jardin
+                XmlNode jardinNode = document.DocumentElement.SelectSingleNode("/Document/jardin");
+                XmlNode fabriqueAbstraiteNode = jardinNode.SelectSingleNode("fabriqueAbstraite/Titre");
+
+                // Fabrique abstraite
+                FabriqueAbstraite fabriqueAbstraiteLoad = new FabriqueFourmiliere();
+
+                if (fabriqueAbstraiteNode.InnerText != null)
+                {
+                    //fabriqueAbstraiteLoad.Titre = fabriqueAbstraiteNode.InnerText; READ ONLY
+                }
+
+                EnvironnementAbstrait jardinLoad = new Jardin(fabriqueAbstraiteLoad);
+
+                // Coordonnées de la fourmilière
+                var fourmiliereNode = jardinNode.SelectSingleNode("Fourmiliere");
+                int fourmiliereX = int.Parse(fourmiliereNode.SelectSingleNode("X").InnerText);
+                int fourmiliereY = int.Parse(fourmiliereNode.SelectSingleNode("Y").InnerText);
+
+                // Tableau des zones
+                ZoneAbstraite[,] zonesArray = new ZoneAbstraite[cols, rows];
+
+                var zonesNode = jardinNode.SelectNodes("Zones");
+                foreach (XmlNode zoneNode in zonesNode)
+                {
+                    String zoneNom = zoneNode.SelectSingleNode("Nom").InnerText;
+                    int zoneX = int.Parse(zoneNode.SelectSingleNode("X").InnerText);
+                    int zoneY = int.Parse(zoneNode.SelectSingleNode("Y").InnerText);
+                    ZoneAbstraite zone = new BoutDeTerrain(zoneNom, zoneX, zoneY);
+
+                    // Objets
+
+
+                    // autres traitement
+                    //..
+
+                    // Ajout au tableau
+                    zonesArray[zoneX, zoneY] = zone;
+
+                    // Est-ce la fourmiliere?
+                    if (zoneX == fourmiliereX && zoneY == fourmiliereY)
+                    {
+                        //jardinLoad.Fourmiliere = zone; READ-ONLY
+                    }
+                }
+
             }
         }
 
