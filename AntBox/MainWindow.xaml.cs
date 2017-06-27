@@ -14,6 +14,7 @@ using System.Windows.Threading;
 using System.Threading.Tasks;
 using AntBox.Etat;
 using System.Xml;
+using Microsoft.Win32;
 
 namespace AntBox
 { 
@@ -142,23 +143,6 @@ namespace AntBox
             }
             else
             {
-                if (File.Exists("save.xml"))
-                {
-                    string messageFile = "Ecraser l'ancienne sauvegarde ?";
-                    string titreFile = "Confirmer suppression";
-                    MessageBoxButton mbbFile = MessageBoxButton.YesNo;
-                    MessageBoxImage mbiFile = MessageBoxImage.Question;
-                    MessageBoxResult mbr = MessageBox.Show(messageFile, titreFile, mbbFile, mbiFile);
-                    if (mbr == MessageBoxResult.Yes)
-                    {
-                        File.Delete("save.xml");
-                    }
-                    else
-                    {
-                        return;
-                    }
-                }
-
                 // Init du fichier xml
                 var document = new System.Xml.Linq.XDocument(new System.Xml.Linq.XElement("Document"));
 
@@ -238,7 +222,18 @@ namespace AntBox
                 jardinDocument.Add(zones);
 
                 document.Root.Add(jardinDocument);
-                document.Save("save.xml");
+                //document.Save("C:\\save.xml");
+
+                // Save dialog
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.Filter = " XML Files (.xml)|*.xml";
+
+                Nullable<bool> result = saveFileDialog.ShowDialog();
+
+                if (result == true)
+                {
+                    document.Save(saveFileDialog.FileName);
+                }
 
                 System.Media.SoundPlayer sp = new System.Media.SoundPlayer(AntBox.Properties.Resources.kaching);
                 sp.Load();
@@ -428,6 +423,13 @@ namespace AntBox
                 }
 
                 // Creation de la grille
+                if (generation)
+                {
+                    Grille.RowDefinitions.Clear();
+                    Grille.ColumnDefinitions.Clear();
+                    Grille.Children.Clear();
+                }
+
                 for (int i = 0; i < cols; i++)
                 {
                     Grille.ColumnDefinitions.Add(new ColumnDefinition() { });
