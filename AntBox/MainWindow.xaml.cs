@@ -322,6 +322,7 @@ namespace AntBox
                 string titre = "Avertissement";
                 MessageBoxButton mbb = MessageBoxButton.YesNo;
                 MessageBoxImage mbi = MessageBoxImage.Warning;
+
                 MessageBoxResult mbr =  MessageBox.Show(message, titre, mbb, mbi);
                 if(mbr == MessageBoxResult.Yes) {
                     Grille.RowDefinitions.Clear();
@@ -424,22 +425,6 @@ namespace AntBox
                     Grid.SetRow(image, zone.positionY - 1);
                 }
             }
-        }
-
-        public Ellipse drawRainEllipse(Grid grid, int x, int y, int colSpan = 1, int rowSpan = 1)
-        {
-            Ellipse ellipse = new Ellipse();
-            ellipse.Fill = new SolidColorBrush(Colors.Blue);
-            ellipse.Margin = new Thickness(3);
-            ellipse.Opacity = 0.5;
-
-            grid.Children.Add(ellipse);
-            Grid.SetColumn(ellipse, x);
-            Grid.SetRow(ellipse, y);
-            Grid.SetColumnSpan(ellipse, colSpan);
-            Grid.SetRowSpan(ellipse, rowSpan);
-
-            return ellipse;
         }
 
         public UIElement getGridChild(Grid grid, int x, int y)
