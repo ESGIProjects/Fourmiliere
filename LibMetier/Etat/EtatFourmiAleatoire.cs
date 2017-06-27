@@ -7,7 +7,7 @@ using AntBox.Environnement;
 
 namespace AntBox.Etat
 {
-    class EtatFourmiAleatoire : EtatPersonnageAbstrait
+    public class EtatFourmiAleatoire : EtatPersonnageAbstrait
     {
         protected Queue<ZoneAbstraite> ZonesPrecedentes = new Queue<ZoneAbstraite>();
         protected ZoneAbstraite ZoneSuivante = null;

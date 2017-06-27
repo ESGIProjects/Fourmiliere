@@ -7,7 +7,7 @@ namespace AntBox.Factory
 {
 	public abstract class FabriqueAbstraite
 	{
-		public string Titre { get; }
+		public string Titre { get; set; }
 
 		public abstract AccesAbstrait CreerAcces(ZoneAbstraite zoneDebut, ZoneAbstraite zoneFin);
 		public abstract EnvironnementAbstrait CreerEnvironnement();

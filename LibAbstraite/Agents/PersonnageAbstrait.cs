@@ -13,7 +13,7 @@ namespace AntBox
         public Subject Observe { get; protected set; }
         public EtatPersonnageAbstrait Etat { get;  set; }
         public ZoneAbstraite ZoneActuelle { get; set; }
-        public ZoneAbstraite maison { get; protected set; }
+        public ZoneAbstraite maison { get; set; }
 
         public virtual void AnalyseSituation()
         {

@@ -11,7 +11,7 @@ namespace AntBox.Environnement
 	public abstract class EnvironnementAbstrait
 	{
         //la fourmilière
-        public ZoneAbstraite Fourmiliere { get; protected set; } = null;
+        public ZoneAbstraite Fourmiliere { get; set; } = null;
 
         //les éléments composants l'environnement
         public List<ObjetAbstrait> ObjetList { get; protected set; }

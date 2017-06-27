@@ -219,46 +219,12 @@ namespace AntBox
                     }
                     zoneElement.Add(objets);
 
-                    // Liste des accès de cette zone
-                    var accesList = new System.Xml.Linq.XElement("AccesList");
-                    foreach (AccesAbstrait acces in zone.AccesList)
-                    {
-                        var accesElement = new System.Xml.Linq.XElement("Acces");
-
-                        if (acces.ZoneDebut != null)
-                        {
-                            var zoneDebut = new System.Xml.Linq.XElement("ZoneDebut");
-                            zoneDebut.Add(new System.Xml.Linq.XElement("X", acces.ZoneDebut.positionX));
-                            zoneDebut.Add(new System.Xml.Linq.XElement("Y", acces.ZoneDebut.positionY));
-                            accesElement.Add(zoneDebut);
-                        }
-
-                        if (acces.ZoneFin != null)
-                        {
-                            var zoneFin = new System.Xml.Linq.XElement("ZoneFin");
-                            zoneFin.Add(new System.Xml.Linq.XElement("X", acces.ZoneFin.positionX));
-                            zoneFin.Add(new System.Xml.Linq.XElement("Y", acces.ZoneFin.positionY));
-                            accesElement.Add(zoneFin);
-                        }
-                        accesList.Add(accesElement);
-                    }
-                    zoneElement.Add(accesList);
-
                     var personnages = new System.Xml.Linq.XElement("Personnages");
                     foreach (PersonnageAbstrait personnage in zone.PersonnageList)
                     {
                         var personnageElement = new System.Xml.Linq.XElement("Personnage");
                         personnageElement.Add(new System.Xml.Linq.XElement("Nom", personnage.Nom));
-                        personnageElement.Add(new System.Xml.Linq.XElement("Observe", personnage.Observe));
                         personnageElement.Add(new System.Xml.Linq.XElement("Etat", personnage.Etat));
-
-                        if (personnage.maison != null)
-                        {
-                            var maison = new System.Xml.Linq.XElement("maison");
-                            maison.Add(new System.Xml.Linq.XElement("X", personnage.maison.positionX));
-                            maison.Add(new System.Xml.Linq.XElement("Y", personnage.maison.positionY));
-                            personnageElement.Add(maison);
-                        }
 
                         personnages.Add(personnageElement);
                     }
@@ -320,7 +286,7 @@ namespace AntBox
 
                 if (fabriqueAbstraiteNode.InnerText != null)
                 {
-                    //fabriqueAbstraiteLoad.Titre = fabriqueAbstraiteNode.InnerText; READ ONLY
+                    fabriqueAbstraiteLoad.Titre = fabriqueAbstraiteNode.InnerText;
                 }
 
                 EnvironnementAbstrait jardinLoad = new Jardin(fabriqueAbstraiteLoad);
@@ -329,23 +295,96 @@ namespace AntBox
                 var fourmiliereNode = jardinNode.SelectSingleNode("Fourmiliere");
                 int fourmiliereX = int.Parse(fourmiliereNode.SelectSingleNode("X").InnerText);
                 int fourmiliereY = int.Parse(fourmiliereNode.SelectSingleNode("Y").InnerText);
+                Console.WriteLine(fourmiliereX);
+                Console.WriteLine(fourmiliereY);
 
                 // Tableau des zones
-                ZoneAbstraite[,] zonesArray = new ZoneAbstraite[cols, rows];
+                ZoneAbstraite[,] zonesArray = new ZoneAbstraite[cols+1, rows+1];
 
-                var zonesNode = jardinNode.SelectNodes("Zones");
-                foreach (XmlNode zoneNode in zonesNode)
+                var zonesNode = jardinNode.SelectSingleNode("Zones");
+                foreach (XmlNode zoneNode in zonesNode.ChildNodes)
                 {
                     String zoneNom = zoneNode.SelectSingleNode("Nom").InnerText;
+                    Console.WriteLine(zoneNom);
                     int zoneX = int.Parse(zoneNode.SelectSingleNode("X").InnerText);
                     int zoneY = int.Parse(zoneNode.SelectSingleNode("Y").InnerText);
-                    ZoneAbstraite zone = new BoutDeTerrain(zoneNom, zoneX, zoneY);
+                    ZoneAbstraite zone = new BoutDeTerrain("", zoneX, zoneY);
 
                     // Objets
+                    var objetsNode = zoneNode.SelectSingleNode("Objets");
+                    if (objetsNode.ChildNodes != null)
+                    {
+                        foreach (XmlNode objetNode in objetsNode)
+                        {
+                            String objetNom = objetNode.SelectSingleNode("Nom").InnerText;
+                            int objetHpMax = int.Parse(objetNode.SelectSingleNode("HPMax").InnerText);
+                            int objetHp = int.Parse(objetNode.SelectSingleNode("HP").InnerText);
+                            String objetType = objetNode.SelectSingleNode("Type").InnerText;
 
+                            ObjetAbstrait objet;
 
-                    // autres traitement
-                    //..
+                            if (objetType.Equals("Nourriture"))
+                            {
+                                objet = new Nourriture();
+                            }
+                            else if (objetType.Equals("Oeuf"))
+                            {
+                                objet = new Oeuf();
+                            }
+                            else
+                            {
+                                objet = new Pheromone();
+                            }
+                                
+                            objet.Nom = objetNom;
+                            objet.HPMax = objetHpMax;
+                            objet.HP = objetHp;
+
+                            // Ajout de l'objet
+                            zone.AjouterObjet(objet);
+                            jardinLoad.AjouteObjet(objet);
+                        }
+                    }
+
+                    // Acces
+                    // Vaut mieux les recréer directement apres avoir fait toutes les zones? 
+                    // Et du coup ne pas les save
+
+                    // Personnages
+                    var personnagesNode = zoneNode.SelectSingleNode("Personnages");
+                    if (personnagesNode.ChildNodes != null)
+                    {
+                        foreach (XmlNode personnageNode in personnagesNode)
+                        {
+                            String personnageNom = personnageNode.SelectSingleNode("Nom").InnerText;
+                            String personnageEtatType = personnageNode.SelectSingleNode("Etat").InnerText;
+
+                            EtatPersonnageAbstrait personnageEtat;
+
+                            if (personnageEtatType.Equals("AntBox.Etat.EtatFourmiMorte"))
+                            {
+                                personnageEtat = new EtatFourmiMorte();
+                            } else if (personnageEtatType.Equals("AntBox.Etat.EtatFourmiAbrite"))
+                            {
+                                personnageEtat = new EtatFourmiAbrite();
+                            } else if (personnageEtatType.Equals("AntBox.Etat.EtatFourmiFoundFood"))
+                            {
+                                personnageEtat = new EtatFourmiFoundFood();
+                            } else if (personnageEtatType.Equals("AntBox.Etat.EtatFourmiFuirPluie"))
+                            {
+                                personnageEtat = new EtatFourmiFuirPluie();
+                            } else
+                            {
+                                personnageEtat = new EtatFourmiAleatoire();
+                            }
+
+                            PersonnageAbstrait personnage = new Fourmi(personnageNom, AntWeather.SharedAntWeather, null, personnageEtat);
+                            personnage.ZoneActuelle = zone;
+
+                            zone.AjouterPersonnage(personnage);
+                            jardinLoad.AjoutePersonnage(personnage);
+                        }
+                    }
 
                     // Ajout au tableau
                     zonesArray[zoneX, zoneY] = zone;
@@ -353,9 +392,57 @@ namespace AntBox
                     // Est-ce la fourmiliere?
                     if (zoneX == fourmiliereX && zoneY == fourmiliereY)
                     {
-                        //jardinLoad.Fourmiliere = zone; READ-ONLY
+                        jardinLoad.Fourmiliere = zone;
+                    }
+
+                    jardinLoad.AjouteZoneAbstraites(zone);
+
+                    int nombreZone = jardinLoad.ZoneList.Count;
+                    ZoneAbstraite zoneDebut;
+                    ZoneAbstraite zoneFin;
+                    AccesAbstrait acces;
+
+                    if ((nombreZone >=2) && (zoneX > 1))
+                    {
+                        zoneDebut = jardinLoad.ZoneList[nombreZone - 2];
+                        zoneFin = jardinLoad.ZoneList[nombreZone - 1];
+                        acces = jardinLoad.fabriqueAbstraite.CreerAcces(zoneDebut, zoneFin);
+
+                        jardinLoad.AjouteChemins(acces);
+                    }
+
+                    if ((nombreZone - cols) >= 1)
+                    {
+                        zoneDebut = jardinLoad.ZoneList[nombreZone - cols - 1];
+                        zoneFin = jardinLoad.ZoneList[nombreZone - 1];
+                        acces = jardinLoad.fabriqueAbstraite.CreerAcces(zoneDebut, zoneFin);
+                        jardinLoad.AjouteChemins(acces);
                     }
                 }
+
+                // Donner la fourmiliere comme maison de chaque personnage
+
+                foreach (PersonnageAbstrait personnage in jardinLoad.PersonnageList)
+                {
+                    personnage.maison = jardinLoad.Fourmiliere;
+                }
+
+                // Creation de la grille
+                for (int i = 0; i < cols; i++)
+                {
+                    Grille.ColumnDefinitions.Add(new ColumnDefinition() { });
+                }
+
+                for (int i = 0; i < rows; i++)
+                {
+                    Grille.RowDefinitions.Add(new RowDefinition() { });
+                }
+
+                jardin = jardinLoad;
+
+                Grille.Background = new SolidColorBrush(Colors.LightGreen);
+                genereAffichage();
+                generation = true;
 
             }
         }

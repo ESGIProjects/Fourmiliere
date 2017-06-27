@@ -129,7 +129,6 @@ namespace AntBox.Environnement
                         this.AjouteZoneAbstraites(this.fabriqueAbstraite.CreerZone("Zone " + tempoNom, x, y));
                     }
                     
-
                     nombreZone = this.ZoneList.Count;
 
                     //si on a 2 zones ou plus, alors la dernière zone à une case voisine à sa gauche (sauf si la première colonne)
