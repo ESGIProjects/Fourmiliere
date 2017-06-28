@@ -4,11 +4,6 @@
 /Users/fabibi/Visual Sudio/Fourmiliere/LibAbstraite/obj/Debug/LibAbstraite.csproj.CoreCompileInputs.cache
 /Users/fabibi/Visual Sudio/Fourmiliere/LibAbstraite/obj/Debug/LibAbstraite.dll
 /Users/fabibi/Visual Sudio/Fourmiliere/LibAbstraite/obj/Debug/LibAbstraite.pdb
-C:\Users\fabien.griselles\Documents\Visual Studio 2017\Projects\Fourmiliere\LibAbstraite\bin\Debug\LibAbstraite.dll
-C:\Users\fabien.griselles\Documents\Visual Studio 2017\Projects\Fourmiliere\LibAbstraite\bin\Debug\LibAbstraite.pdb
-C:\Users\fabien.griselles\Documents\Visual Studio 2017\Projects\Fourmiliere\LibAbstraite\obj\Debug\LibAbstraite.dll
-C:\Users\fabien.griselles\Documents\Visual Studio 2017\Projects\Fourmiliere\LibAbstraite\obj\Debug\LibAbstraite.pdb
-C:\Users\fabien.griselles\Documents\Visual Studio 2017\Projects\Fourmiliere\LibAbstraite\obj\Debug\LibAbstraite.csprojResolveAssemblyReference.cache
 C:\Users\kevin\Desktop\AntBox\LibAbstraite\bin\Debug\LibAbstraite.dll
 C:\Users\kevin\Desktop\AntBox\LibAbstraite\bin\Debug\LibAbstraite.pdb
 C:\Users\kevin\Desktop\AntBox\LibAbstraite\obj\Debug\LibAbstraite.csprojResolveAssemblyReference.cache
@@ -24,3 +19,7 @@ C:\Users\Jason\Desktop\Fourmiliere\LibAbstraite\bin\Debug\LibAbstraite.pdb
 C:\Users\Jason\Desktop\Fourmiliere\LibAbstraite\obj\Debug\LibAbstraite.csprojResolveAssemblyReference.cache
 C:\Users\Jason\Desktop\Fourmiliere\LibAbstraite\obj\Debug\LibAbstraite.dll
 C:\Users\Jason\Desktop\Fourmiliere\LibAbstraite\obj\Debug\LibAbstraite.pdb
+C:\Users\fabien.griselles\Documents\Visual Studio 2017\Projects\Fourmiliere\LibAbstraite\bin\Debug\LibAbstraite.dll
+C:\Users\fabien.griselles\Documents\Visual Studio 2017\Projects\Fourmiliere\LibAbstraite\bin\Debug\LibAbstraite.pdb
+C:\Users\fabien.griselles\Documents\Visual Studio 2017\Projects\Fourmiliere\LibAbstraite\obj\Debug\LibAbstraite.dll
+C:\Users\fabien.griselles\Documents\Visual Studio 2017\Projects\Fourmiliere\LibAbstraite\obj\Debug\LibAbstraite.pdb

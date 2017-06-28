@@ -59,7 +59,7 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -165,9 +165,6 @@
     <Resource Include="Resources\food.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\sugar.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\death_ant.png" />
   </ItemGroup>
   <ItemGroup>
@@ -181,6 +178,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\sugar.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
